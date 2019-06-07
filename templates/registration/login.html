@@ -1,0 +1,35 @@
+{% extends "base_generic.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}<title>Log In</title>{% endblock %}
+{% block contentheader %}
+  <h3>Log In</h3>
+{% endblock %}
+
+{% block content %}
+
+{% if form.errors %}
+  <p class="logintro">Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+{% if next %}
+  {% if user.is_authenticated %}
+    <p class="logintro">Your account doesn't have acces to this page. To proceed, please login with an account that has access.</p>
+  {% else %}
+    <p class="logintro">Introduce your credentials to log in.</p>
+  {% endif %}
+{% endif %}
+
+<form class="login" method="post" action="{% url 'login' %}">
+  {% csrf_token %}
+	{{ form|crispy }}
+    <input type="submit" value="login" />
+    <input type="hidden" name="next" value="{{ next }}" />
+</form>
+
+{# Assumes you setup the password_reset view in your URLconfig #}
+
+<p class="logintro"><a href="{% url 'password_reset' %}">Lost password?</a></p>
+
+{% endblock %}

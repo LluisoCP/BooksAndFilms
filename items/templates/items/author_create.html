@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}<title>Add Artist</title>{% endblock %}
+
+{% block contentheader %}
+  <h3 class="text-center">Add a new Artist</h3>
+{% endblock %}
+
+{% block content %}
+  <form class="artist" action="" method="post">
+	{% csrf_token %}
+	{{ form|crispy }}
+	<button type="submit" class="btn btn-primary">
+	  Add Artist  
+	</button>
+  </form>
+{% endblock %}

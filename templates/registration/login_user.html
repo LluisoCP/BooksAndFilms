@@ -1,0 +1,18 @@
+{% extends "base_generic.html" %}
+
+{% if next %}
+  <form action="/login/?next={{ next }}" method="post" >
+{%else%}
+  <form action="/login/" method="post" >
+{% endif %}
+
+{% csrf_token %}
+
+  username:
+  <input type="text" name="username" value="{{ username }}" /><br />
+  password:
+  <input type="password" name="password" value="" /><br />
+
+  <input type="submit" value="Log In"/>
+
+</form>

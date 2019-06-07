@@ -1,0 +1,26 @@
+{% extends "base_generic.html" %}
+
+{% block title %}<title>All Authors</title>{% endblock %}
+
+{% block contentheader %}
+  <h3 class="text-center">The Artists</h3>
+{% endblock %}
+
+{% block content %}
+
+  {% if author_list %}
+	<div class="row no-gutters artist-list">
+    {% for author in author_list %}
+	  <div class="artist">
+		  <h4>{{ author.last_name }}, {{ author.first_name }}</h4>
+		  <p>Born: {% firstof author.date_of_birth "Not available" %}</p>
+		  <p>Died: {% firstof author.date_of_death "Still alive" %}</p>
+		  <p class="artist-text">Here there should be some data about the author from the database, but I didn't model the Author with such data because I'm stupid.</p>
+		  <a href="{{ author.get_absolute_url }}" class="btn btn-primary">Go to Author</a>
+	  </div>
+    {% endfor %}
+	</div>
+  {% else %}
+    <p>Sorry! We have no authors</p>
+  {% endif %}
+{% endblock %}

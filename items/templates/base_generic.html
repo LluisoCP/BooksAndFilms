@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% block title %}<title>Books &amp; Films</title>{% endblock %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  <!-- General CSS in static file -->
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+  {% block navbar %}{% endblock %}
+  {% block jumbo %}
+    <div id="jumbo" class="jumbotron jumbotron-fluid">
+	  <div class="container">
+		  <h1 class="display-4">Welcome to Books &amp; Films</h1>
+		  <p class="lead">A humble website about remarkable artpieces in the fields of literature and cinema.</p>
+		  <hr class="my-4">
+		  <p>It's been built with django at the backend, bootstrap at the frontend and lcp skills on everything else.</p>
+		  <a class="btn btn-lg" href="#" role="button">The Project</a>
+	  </div>
+    </div>
+  {% endblock %}
+  <div class="container-fluid" style="min-height: 600px;">
+	<div id="main" class="row">
+	  <div id="aside" class="col-12 col-md-3 col-lg-2 order-2 order-md-1 pt-3">
+  		{% block sidebar %}
+		<div class="accordion">
+          <h5 class="text-center">Main</h5>
+          <hr>
+          <ul class="sidebar-nav text-center">
+              <li><a href="{% url 'index' %}">Home</a></li>
+              <li><a href="{% url 'books' %}">Books</a></li>
+              <li><a href="#">Films</a></li>
+			  <li><a href="{% url 'authors' %}">Artists</a></li>
+              <li><a href="{% url 'search_form' %}">Search</a></li>
+          </ul>
+          <hr>
+		</div>
+        <div class="accordion">
+          <h5 class="text-center">User</h5>
+          <hr>
+          <ul class="sidebar-nav text-center">
+			{% if user.is_authenticated %}
+              <li><strong>Name: {{ user.get_username }}</strong></li>
+              <li><a href="{% url 'logout' %}?next={% firstof request.path '/' %}">Logout</a></li>
+			{% else %}
+			  <li><a href="{% url 'signup' %}?next={% firstof request.path '/' %}">Sign up</a></li>
+              <li><a href="{% url 'login' %}?next={% firstof request.path '/' %}">Login</a></li>
+			{% endif %}
+          </ul>
+          <hr>
+        </div>
+        <div class="accordion">
+          <h5 class="text-center">Edit</h5>
+          <hr>
+          <ul class="sidebar-nav text-center">
+              <li><a href="{% url 'add-author' %}">Add Artist</a></li>
+			  <li><a href="#">Add Language</a></li>
+              <li><a href="{% url 'upload-book' %}">Add Book</a></li>
+              <li><a href="#">Add Film</a></li>
+          </ul>
+		  <hr>
+        </div>
+		{% endblock %}
+	  </div>
+      <div id="content" class="col-12 col-md-9 col-lg-10 px-0 order-1 order-md-2">
+		<header id="contentheader">
+		{% block contentheader %}{% endblock %}
+		  <hr>
+		</header>
+        {% block content %}{% endblock %}
+      </div>
+	</div>
+  </div>
+  {% block footer %}
+	<footer>
+        <div id="social">
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-github-square"></i></a>
+            <a href="mailto:lluiso.aloha@gmail.com"><i class="fas fa-envelope-square"></i></a>
+            <a href="tel:0769605237"><i class="fas fa-phone-square"></i></a>
+        </div>
+        <div id="credits">
+            <span>&copy; lcpselocurra</span>
+        </div>
+    </footer>
+  {% endblock %}
+  {% block scripts %}{% endblock %}
+	<script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,296 @@
+@font-face {
+    font-family: 'goodtimesrg';
+    src: url('/static/fonts/goodtimesrg.woff2') format('woff2'),
+         url('/static/fonts/goodtimesrg.woff') format('woff');
+    font-weight: normal;
+    font-style: normal; 
+}
+@font-face {
+    font-family: 'freesansregular';
+    src: url('/static/fonts/freesans-webfont.woff2') format('woff2'),
+         url('/static/fonts/freesans-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;   
+}
+
+html, body {
+    margin: 0;
+	width: 100vw;
+	overflow: visible;
+}
+a, a:hover {
+	color: inherit;
+	text-decoration: none;
+}
+
+
+/*Jumbo*/
+#jumbo{
+	margin-bottom: 0;
+	color: white;
+	background-color: #213568;
+	border-bottom: 5px solid #a9b6bc;
+}
+#jumbo hr {
+	background-color: white;
+}
+#jumbo a {
+	color: black;
+	border: 1px solid white;
+	background-color: #96f718;
+	transition: all 0.2s linear;
+}
+#jumbo a:hover {
+	color: white;
+	background-color: #66a810;
+}
+/*Aside*/
+
+#aside {
+	color: white;
+	background-color: #5e85a3;
+}
+/*Llistes del aside*/
+ul.text-center {
+	padding: 0;
+	list-style-type: none;
+}
+/*Expe, ok, però el tamany de lletra s'ha de reduir per pantalles petites*/
+.accordion h5 {
+	cursor: pointer;
+	font-size: 2em;
+	line-height: 2;
+}
+.accordion hr {
+	background-color: black;
+}
+.accordion ul {
+	overflow-y: hidden;
+	-webkit-transition: all .5s;
+	-moz-transition: all .5s;
+	-ms-transition: all .5s;
+	-o-transition: all .5s;
+	transition: all .5s;
+}
+.accordion ul li {
+	font-size: 1.5em;
+	line-height: 1.5;
+}
+/*FOOTER*/
+/*Comú*/
+footer {
+	border-top: 5px solid #a9b6bc;
+	height: 100px;
+	background-color: #213568;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+#social, #credits {
+	width: 50%;
+	height: 40%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#social a {
+	margin: 0 15px;
+	font-size: 2em;
+	color: #96f718;
+}
+#credits span {
+	color: white;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+
+/* MAIN CONTENT */
+/*Border=Comú - BG=Index+Llistes*/
+#content {
+	min-height: 600px;
+	border-left: 5px solid #a9b6bc;/*Aquest és per grans pantalles*/
+	background-color: #363742; /*Aquest és per l'index i les llistes*/
+}
+/*Title of Content (in header)*/
+/*Comú*/
+#contentheader {
+	text-align: center;
+}/*Aixó està dos cops, aquí i a Bootstrap*/
+#contentheader h3 {
+	margin-bottom: 0;
+	padding: 10px;
+	padding-bottom: 0;
+	color: white;
+	font-family: Tahoma, Geneva, sans-serif;
+	font-family: 'goodtimesrg';
+}
+#contentheader hr {
+	background-color: white;
+	border-radius: 1px;
+	width: 30%;
+	height: 3px;
+}
+
+/*CONTENT BOOKLIST, FILMLIST*/
+/* This is the original*/
+#content .card-body {
+	background-color: rgb(220,225,225);
+}
+/*Artist List*/
+.artist {
+	background-color: white;
+	border: 1px solid black;
+	border-radius: 5px;
+	padding: 20px;
+	margin: 20px 2%;
+	flex: 0 1 46%;
+}
+.artist h4 {
+	text-align: center;
+	width: 90%;
+	margin: 0 auto;
+}
+.artist p {
+	margin: 0 auto;
+}
+.artist p.artist-text {
+	margin: 5px auto 15px;
+}
+
+/*FORMS*/
+/*This is ok only for large screens?*/
+#content form.upload {
+	/*margin: 0 20px 0 40px;*/
+	border: 2px solid red;
+	border-radius: 10px;
+	width: 80%;
+	margin: 0 auto 40px;
+	padding: 20px;
+}
+#content form.upload label {
+	color: white;
+}/*
+#content form.upload div:last-of-type input {
+	color: white;
+}*/
+/*Add Artist+login+sigup*/
+form.artist, form.login, form.signup, form.search {
+	border: 2px solid red;
+	border-radius: 10px;
+	width: 80%;
+	margin: 0 auto;
+	padding: 20px;
+	background-color: white;
+}
+form.signup {
+	margin-bottom: 40px;
+}
+/*Log In*/
+p.logintro, p.signupintro, .searchintro {
+	margin-left: 15%;
+	color: white;
+	font-weight: bold;
+}
+/*Sign Up*/
+
+/*Custom carousel*/
+#bookcarousel .carousel-item {
+	height: 600px;
+}
+#bookcarousel #carouseltext {
+	width: 70%;
+	background-color: rgba(0,0,0,0.7);
+	border-radius: 10px;
+	padding: 10px;
+}
+#bookcarousel a span:first-child {
+	padding: 20px;
+	border-radius: 10%;
+	background-color: #363742;
+}
+
+
+/* Carousel styling from course
+.carousel {
+    background: #512DA8;
+}
+# bookcarousel .carousel-item {
+    height: 300px;
+}
+.carousel-item img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-height: 300px;
+}
+*/
+
+/* Custom controls over carousel sliding
+#carouselButton {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+*/
+
+/*DETAILS*/
+/*Book & Film*/
+#item {
+	margin: 0 30px 30px;
+	padding: 30px 20px 10px;
+	background-color: white;
+	border: 2px solid red;
+	border-radius: 10px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+#item #image {
+	position: relative;
+	flex: 0 1 35%;
+}
+#item #image figcaption {
+	width: 80%;
+	text-align: center;
+	font-weight: bold;
+	display: inline-block;
+	padding: 5px 15px;
+	background-color: rgba(255,255,255,0.7);
+	border-radius: 5px;
+	position: absolute;
+	bottom: 15px;
+	left: 50%;
+	transform: translateX(-50%);
+}
+#item #bookdesc {
+	margin: 0 2%;
+	flex: 0 1 61%;
+	align-self: center;
+}
+#item #grade {
+	border: 2px solid black;
+	border-radius: 10px;
+	padding: 20px 30px;
+	margin: 20px 5%;
+	flex: 0 1 90%;
+}
+#item #comments {
+	margin: 20px 0;
+}
+#item #comments .comment {
+	margin: 10px 0;
+}
+#item #comments .comment {
+	margin-left: 20px;
+	padding: 10px;
+	border: 2px solid black;
+	border-radius: 10px;
+}
+#item #comments .comment .content {
+	font-style: italic;
+}
+#item #comments #commentbook {
+	margin-top: 20px;
+}

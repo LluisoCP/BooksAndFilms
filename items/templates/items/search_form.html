@@ -1,0 +1,24 @@
+{% extends "base_generic.html" %}
+
+{% block title %}<title>Search</title>{% endblock %}
+
+{% block contentheader %}
+  <h3 class="text-center">Search</h3>
+{% endblock %}
+
+{% block content %}
+  {% if message %}
+    <h5 class="searchintro">Oops!</h5>
+    <p class="searchintro">{{ message }}</p>
+  {% else %}
+    <p class="searchintro">A maximum of three terms will be considered.</p>
+  {% endif %}
+  <form class="search" action="/items/search/" method="GET">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="search">Write the term(s) to search:</label>
+      <input class="ml-2" type="text" id="search" name="search-input" placeholder="Author, Title...">
+    </div>
+    <button class="btn btn-primary" type="submit">Search</button>
+  </form>
+{% endblock %}

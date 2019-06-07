@@ -1,0 +1,33 @@
+{% extends "base_generic.html" %}
+
+{% block title %}<title>Results</title>{% endblock %}
+
+{% block contentheader %}
+  <h3 class="text-center">Search Results</h3>
+{% endblock %}
+
+{% block content %}
+<h1>Search results</h1>
+<p>Your search for <strong>{% for term in terms %}{{ term }}{% if not forloop.last %}, {% endif %}{% endfor %}</strong> gave these results:</p>
+<h4>Books:</h4>
+{% if books %}
+  <ul class="list-group list-group-flush">
+  {% for book in books %}
+    <li class="list-group-item"><a href="{{ book.get_absolute_url }}">{{ book.title }}</a> ({{ book.author }})</li>
+  {% endfor %}
+  </ul>
+{% else %}
+  <p>Our library hasn't any book with your search terms in its title.</p>
+{% endif %}
+<h4 class="mt-3">Authors:</h4>
+{% if authors %}
+  <ul class="list-group list-group-flush">
+  {% for author in authors %}
+    <li class="list-group-item"><a href="#">{{ author.last_name }}, {{ author.first_name }}</a></li>
+  {% endfor %}
+  </ul>
+{% else %}
+  <p>Our library hasn't any author with your search terms in his/her name.</p>
+{% endif %}
+
+{% endblock %}
