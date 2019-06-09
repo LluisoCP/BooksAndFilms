@@ -72,6 +72,25 @@
 		  <hr>
 		</header>
         {% block content %}{% endblock %}
+		{% block pagination %}
+		  {% if is_paginated %}
+			<div class="pagination">
+				<span class="page-links">
+
+					<a class="btn btn-sm btn-outline-primary"
+					   {% if page_obj.has_previous %} href="{{ request.path }}?page={{ page_obj.previous_page_number }}"{% else %} disabled aria-disabled="true" {% endif %}>back</a>
+
+					<span style="margin-left: 20px; margin-right: 20px" class="page-current">
+					  Page {{ page_obj.number }} of {{page_obj.paginator.num_pages }}.
+					</span>
+
+					<a class="btn btn-sm btn-outline-primary"
+					   {% if page_obj.has_next %} href="{{ request.path }}?page={{ page_obj.next_page_number }}" {% else %} disabled aria-disabled="true" {% endif %}>forth</a>
+
+				</span>
+			</div>
+		  {% endif %}
+		{% endblock %}
       </div>
 	</div>
   </div>

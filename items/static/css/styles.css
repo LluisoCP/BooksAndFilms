@@ -158,7 +158,16 @@ footer {
 .artist p.artist-text {
 	margin: 5px auto 15px;
 }
-
+/*Lists Pagination*/
+#content .pagination {
+	margin: 40px 0;
+}
+#content .pagination .page-links {
+	margin: 0 auto;
+	padding: 10px 15px;
+	border-radius: 5px;
+	background-color: rgb(220,225,225);
+}
 /*FORMS*/
 /*This is ok only for large screens?*/
 #content form.upload {

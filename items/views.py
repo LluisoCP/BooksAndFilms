@@ -28,13 +28,14 @@ def index(request):
 # MODEL LIST VIEWS
 class BookListView(ListView):
     model = Book
+    paginate_by = 6
     
 #class FilmListView(ListView):
 #	model = Film
 
 class AuthorListView(ListView):
-	model = Author
-
+    model = Author
+    paginate_by = 6
 
 # EDIT VIEWS
 from django.contrib.auth.decorators import login_required
