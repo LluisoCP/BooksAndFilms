@@ -4,7 +4,7 @@
 
 {% block title %}<title>Log In</title>{% endblock %}
 {% block contentheader %}
-  <h3>Log In</h3>
+  <h3 class="text-center">Log In</h3>
 {% endblock %}
 
 {% block content %}
@@ -21,7 +21,7 @@
   {% endif %}
 {% endif %}
 
-<form class="login" method="post" action="{% url 'login' %}">
+<form class="form" method="post" action="{% url 'login' %}">
   {% csrf_token %}
 	{{ form|crispy }}
     <input type="submit" value="login" />

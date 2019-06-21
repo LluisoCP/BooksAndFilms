@@ -9,6 +9,7 @@ from django.http import HttpResponse
 from .models import Book, Comment, Author # Film
 from django.db.models import Q
 
+
 # MAIN VIEW
 def index(request):
     """View function for the main page if the site"""
@@ -41,6 +42,7 @@ class AuthorListView(ListView):
 from django.contrib.auth.decorators import login_required
 
 # @login_required(redirect_field_name='next', login_url=None)
+@login_required
 def UploadBookView(request):
 	if request.method == 'POST':
 		form = UploadBookForm(request.POST, request.FILES)
@@ -54,6 +56,7 @@ def UploadBookView(request):
 	})
 
 from .forms import CreateAuthorForm
+@login_required
 def create_author(request):
 	if request.method == 'POST':
 		form = CreateAuthorForm(request.POST)
@@ -90,8 +93,14 @@ def book_detail(request, pk):
 	return render(request, 'items/book_details.html', context = context)
 
 def author_detail(request, pk):
-	author = get_object_or_404(Author, pk=pk)
-	return render(request, 'items/author_detail.html', {'author': author})
+    author = get_object_or_404(Author, pk=pk)
+    books = Book.objects.filter(author__pk=pk)
+    #films = Film.objects.filter(author__pk=pk)
+    context = {
+        'author': author,
+        'books': books
+    }
+    return render(request, 'items/artist_detail.html', context)
 
 # SEARCH VIEWS
 def search_form(request):

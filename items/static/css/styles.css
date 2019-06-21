@@ -120,6 +120,7 @@ footer {
 }/*Aixó està dos cops, aquí i a Bootstrap*/
 #contentheader h3 {
 	margin-bottom: 0;
+	margin-top: 30px;
 	padding: 10px;
 	padding-bottom: 0;
 	color: white;
@@ -175,26 +176,18 @@ footer {
 	border: 2px solid red;
 	border-radius: 10px;
 	width: 80%;
-	margin: 0 auto 40px;
+	margin: 0 auto 20px;
 	padding: 20px;
 }
-#content form.upload label {
-	color: white;
-}/*
-#content form.upload div:last-of-type input {
-	color: white;
-}*/
-/*Add Artist+login+sigup*/
-form.artist, form.login, form.signup, form.search {
+/*artist+book+signup+login+reset*/
+form.form {
 	border: 2px solid red;
 	border-radius: 10px;
 	width: 80%;
 	margin: 0 auto;
 	padding: 20px;
 	background-color: white;
-}
-form.signup {
-	margin-bottom: 40px;
+	margin-bottom: 20px;
 }
 /*Log In*/
 p.logintro, p.signupintro, .searchintro {
@@ -202,7 +195,22 @@ p.logintro, p.signupintro, .searchintro {
 	color: white;
 	font-weight: bold;
 }
-/*Sign Up*/
+.password-reset {
+	color: white;
+	font-weight: bold;
+	text-align: center;
+	margin: 20px;
+	padding: 10px;
+}
+p.password-reset span {
+	text-decoration: underline;
+}
+p.password-reset small {
+	font-weight: bold;
+}
+.password-reset.failed {
+    color: red;
+}
 
 /*Custom carousel*/
 #bookcarousel .carousel-item {
@@ -303,3 +311,56 @@ p.logintro, p.signupintro, .searchintro {
 #item #comments #commentbook {
 	margin-top: 20px;
 }
+
+/*Artist*/
+section.artist-detail {
+	width: 80%;
+	margin: 10px 10% 20px;
+	padding: 25px 40px;
+	background-color: white;
+	border-radius: 5px;
+	border: 2px solid red;
+	
+}
+
+section.artist-detail h2 {
+	margin-bottom: .7em;
+}
+section.artist-detail .artist-data {
+	margin: 40px 0 40px 2em;
+}
+
+section.artist-detail .artpiece {
+	margin: 0 0 20px 2em;
+}
+section.artist-detail .artpiece h5 a {
+	transition: 0.2s all linear;
+}
+section.artist-detail .artpiece h5 a:hover {
+	color: crimson
+}
+section.artist-detail .artpiece small {
+	font-weight: bold;
+}
+section.artist-detail .artpiece h5::before {
+	content: '';
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

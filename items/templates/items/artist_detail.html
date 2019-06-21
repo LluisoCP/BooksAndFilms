@@ -1,0 +1,47 @@
+{% extends "base_generic.html" %}
+
+{% block title %}<title>Artist</title>{% endblock %}
+
+{% block contentheader %}
+  {% if author %}
+	<h3 class="text-center">{{ author.first_name }} {{ author.last_name }}</h3>
+  {% else %}
+	<h3 class="text-center">Artist not found</h3>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+
+  {% if author %}
+	<section class="artist-detail">
+		<h2>Artist Information</h2>
+		<article class="artist-data">
+			<p><strong>Full Name:</strong> {{ author.last_name }}, {{ author.first_name }}</p>
+			<p><strong>Born:</strong> {{ author.date_of_birth }}</p>
+			<p><strong>Died:</strong> {% firstof author.date_of_death "still alive" %}</p>
+		</article>
+		<hr>
+	{% if books %}
+	
+		<h2>Its Books</h2>
+	  {% for book in books %}
+		<article class="artpiece">
+			<h5><a href="{{ book.get_absolute_url }}">{{ book.title }}</a></h5>
+			<p><small>{% firstof book.phrase "A great artpiece" %} Released in {{ book.release_year }}<br>
+				Original Language: {{ book.language }}</small></p>
+			<p>{{ book.description }}</p>
+			
+		</article>
+		{% if not forloop.last %}
+		<hr>
+		{% endif %}
+	  {% endfor %}
+	{% endif %}
+		
+	{% if films %}
+	  {% for film in films %}<article class="artpiece"></article>{% endfor %}
+	</section>
+	{% endif %}
+
+  {% endif %}
+{% endblock %}

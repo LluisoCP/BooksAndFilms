@@ -13,7 +13,7 @@
   {% else %}
     <p class="searchintro">A maximum of three terms will be considered.</p>
   {% endif %}
-  <form class="search" action="/items/search/" method="GET">
+  <form class="form" action="/items/search/" method="GET">
     {% csrf_token %}
     <div class="form-group">
       <label for="search">Write the term(s) to search:</label>
