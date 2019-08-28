@@ -1,6 +1,22 @@
 {% extends "base_generic.html" %}
 
 {% block title %}<title>All Books</title>{% endblock %}
+{% load static %}
+{% block jumbo %}
+    <div id="jumbo" class="jumbotron jumbotron-fluid" style="background: url({% static 'images/book-bg.jpg' %}) center center / cover no-repeat;">
+        <div class="container">
+          <div class="row">
+            <h1 class="d-inline-block text-center text-sm-left">Our <br>Books <br>Selection</h1>
+          </div>
+          <div class="d-none d-sm-inline-block">
+              <p>
+                Here you'll find the books uploaded by our users and graded by the community.<br>
+                Feel free to comment and, if you're <a href="{% url 'signup' %}">registered</a>, upload a masterpiece!
+              </p>
+          </div>
+        </div>
+    </div>
+{% endblock %}
 
 {% block contentheader %}
   <h3 class="text-center">Some Awesome Books</h3>

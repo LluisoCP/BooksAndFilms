@@ -1,51 +1,51 @@
 {% extends "base_generic.html" %}
-{% block title %}<title>{% firstof book.title "A Book" %}</title>{% endblock %}
+{% block title %}<title>{% firstof film.title "A Film" %}</title>{% endblock %}
 {% load crispy_forms_tags %}
 {% load static %}
 {% block jumbo %}
-    <div id="jumbo" class="jumbotron jumbotron-fluid" style="background: url({% static 'images/book-bg.jpg' %}) center center / cover no-repeat;">
+    <div id="jumbo" class="jumbotron jumbotron-fluid" style="background: url({% static 'images/writefilm.jpeg' %}) center center / cover no-repeat;">
         <div class="container">
           <div class="row">
-            <h1 class="d-inline-block text-center text-sm-left">Our <br>Books <br>Selection</h1>
+            <h1 class="d-inline-block text-center text-sm-left">Film <br>Selected</h1>
           </div>
           <div class="d-none d-sm-inline-block">
               <p>
-                Here you'll find the books uploaded by our users and graded by the community.<br>
-                Feel free to comment and, if you're <a href="{% url 'signup' %}">registered</a>, upload a masterpiece!
+                {{ film.title }}.<br>
+                Feel free to comment this masterpiece!
               </p>
           </div>
         </div>
     </div>
 {% endblock %}
 {% block contentheader %}
-  <h3>{% if book %}{{ book.title }}: {% endif %}The Book</h3>
+  <h3>{% if film %}{{ film.title }}: {% endif %}The Film</h3>
 {% endblock %}
 
 {% block content %}
   
 	<div id="item">
-  {% if book %}
+  {% if film %}
 	  <figure id="image">
-		<img src="{{ book.get_image }}" alt="image of {{ book.title }}" class="img-responsive img-thumbnail"/>
-	{% if book.phrase %}
-		<figcaption>{{ book.phrase }}</figcaption>
+		<img src="{{ film.get_image }}" alt="image of {{ film.title }}" class="img-responsive img-thumbnail"/>
+	{% if film.phrase %}
+		<figcaption>{{ film.phrase }}</figcaption>
 	{% endif %}
 	  </figure>
 	  <section id="bookdesc">
-		<h2>{{ book.title }}</h2>
-		<p>{{ book.description }}</p>
+		<h2>{{ film.title }}</h2>
+		<p>{{ film.description }}</p>
 	  </section>
 	{% if comments %}
 	  <section id="grade">
 		<div>
-		  <h6>This book is rated {{ book.average_grade }}</h6>
+		  <h6>This film is rated {{ film.average_grade }}</h6>
 		</div>
 		<div class="progress">
 		  <div class="progress-bar bg-success" role="progressbar"
-			   style="width: calc({{ book.average_grade }} * 10%);"
-			   aria-valuenow="{{ book.average_grade }}"
+			   style="width: calc({{ film.average_grade }} * 10%);"
+			   aria-valuenow="{{ film.average_grade }}"
 			   aria-valuemin="0" aria-valuemax="10">
-				{{ book.average_grade }}
+				{{ film.average_grade }}
 		  </div>
 		</div>
 	  </section>
@@ -54,7 +54,7 @@
 	  {% for comment in comments %}
 		  <div class="comment">
 			<div class="commentdata">
-				<p>{{ comment.user }} commented {{ book.title }} at {{ comment.commented_at }}</p>
+				<p>{{ comment.user }} commented {{ film.title }} at {{ comment.commented_at }}</p>
 			</div>
 			<div class="content">
 		      <p>
@@ -64,25 +64,25 @@
 		  </div>
 	  {% endfor %}
 	    <div id="commentbook">
-		  <h4>Have you read this book?</h4>
+		  <h4>Have you seen this film?</h4>
 		  <p>If so, be a dear a comment it here please.</p>
 		  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#commentBook">
-		    Comment Book
+		    Comment Film
 		  </button>
 		</div>
 	  </section>
 	{% else %}
 	  <div id="no-comments">
-		    <h4>This book hasn't been commented yet, go be the first one!</h4>
+		    <h4>This film hasn't been commented yet, go be the first one!</h4>
 			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#commentBook">
-			  Comment Book
+			  Comment Film
 			</button>
 		  </div>
 	{% endif %}
   {% else %}
 	  <div id="no-item">
 	  <h4>Ouch...</h4>
-	  <p>We couldn't find this book.</p>
+	  <p>We couldn't find this film.</p>
 	</div>
   {% endif %}
 	</div>
@@ -99,7 +99,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
 	<div class="modal-content">
 	  <div class="modal-header">
-		<h5 class="modal-title" id="commentBookTitle">Comment this book</h5>
+		<h5 class="modal-title" id="commentBookTitle">Comment this film</h5>
 		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		  <span aria-hidden="true">&times;</span>
 		</button>
@@ -125,6 +125,7 @@
 </div>
 {% endblock %}
 {% block scripts %}
+<!-- Borrar el primer script, aquí i a book_details -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

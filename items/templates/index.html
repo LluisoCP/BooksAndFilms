@@ -9,14 +9,9 @@
 {% if img_books and img_data %}
 <div id="bookcarousel" class="bd-example">
   <div id="imgcarousel" class="carousel slide" data-ride="carousel">
-    <ol class="carousel-indicators">
-	  {% for data in img_data %}
-      	<li data-target="#imgcarousel" data-slide-to="{{ data }}"{% if forloop.first %} class="active"{% endif %}></li>
-	  {% endfor %}
-    </ol>
     <div class="carousel-inner">
 	  {% for book in img_books %}
-      <div class="carousel-item{% if forloop.first %} active{% endif %}" data-interval="10000">
+      <div class="carousel-item{% if forloop.first %} active{% endif %}" data-interval="5000">
         <img src="{{ book.get_image }}" class="d-block w-100" alt="{{ book.title }}">
         <div id="carouseltext" class="carousel-caption d-none d-md-inline-block text-center">
           <h5>{{ book.title }}</h5>
@@ -26,15 +21,26 @@
         </div>
       </div>
 	  {% endfor %}
+	  
     </div>
-    <a class="carousel-control-prev" href="#imgcarousel" role="button" data-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#imgcarousel" role="button" data-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
+  	<div class="btn-group" role="group" id="controls">
+      <button type="button" class="btn btn-sm btn-danger" id="prevCarousel">
+        <span class="sr-only">Previous</span>
+        <i class="fas fa-backward"></i>
+      </button>
+  	  <button type="button" class="btn btn-primary btn-sm" id="pauseCarousel">
+        <span class="sr-only">Pause</span>
+  		  <i class="fa fa-pause"></i>
+  	  </button>
+  	  <button type="button" class="btn btn-success btn-sm" id="playCarousel">
+        <span class="sr-only">Play</span>
+  		  <i class="fa fa-play"></i>
+  	  </button>
+      <button type="button" class="btn btn-sm btn-danger" id="nextCarousel">
+        <span class="sr-only">Next</span>
+        <i class="fas fa-forward"></i>
+      </button>
+  	</div>
   </div>
 </div>
 {% endif %}
@@ -42,7 +48,6 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 {% endblock %}

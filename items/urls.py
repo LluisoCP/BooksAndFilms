@@ -11,7 +11,8 @@ urlpatterns = [
     #path('films/<int:pk>', views.FilmDetail.as_view(), name='film-detail'),
     #path('films/upload/', views.UploadFilmView, name='upload-film'),
     path('authors/', views.AuthorListView.as_view(), name='authors'),
-    path('authors/<int:pk>', views.author_detail, name = 'author-detail')
+    path('authors/<int:pk>', views.author_detail, name = 'author-detail'),
+	path('the-project', views.project, name='project')
 ]
 
 # SEARCH FORM

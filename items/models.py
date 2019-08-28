@@ -8,7 +8,11 @@ class Author(models.Model):
     last_name = models.CharField(max_length=100)
     date_of_birth = models.DateField('Born', null=True, blank=True)
     date_of_death = models.DateField('Died', null=True, blank=True)
-    
+    #GENRES = [('','Select the author\'s genre'),('M', 'Male'), ('F','Female'), ('X','Other')]
+	#genre = models.CharField(max_length=1, choices=GENRES)
+	#short_bio = models.CharField(max_length=255, blank=true, default='No biography has been set for this author')
+	#ROLES = [('Writter', 'Writter'), ('Director', 'Director')]
+	#role = models.CharField(max_length=8, choices=ROLES)
     #This should be changed to 'author_details' para no marear
     def get_absolute_url(self):
         """Returns the url to access a particular author instance."""
@@ -20,18 +24,17 @@ class Author(models.Model):
     
     class Meta:
         ordering: ['last_name']
-        permissions = (("can_edit_author", "Edit author"),)
         
 
 class Comment(models.Model):
     user = models.CharField(max_length=64)
-    item = models.ForeignKey(
-		'Book', #Posar Item? No
+    item = models.ForeignKey( #S'ha de dir book i repetir-lo per film
+		'Book', #Posar Item? No (?)
 		related_name='comments',
 		related_query_name='with_comments',
-		on_delete=models.SET_NULL,
+		on_delete=models.CASCADE,
 		null=True,
-		blank=True #Millor False ? No
+		blank=True
 	)
 	#Podria afegir-li un altre foreignKey vers Film i afegir als dos FK un default rollo 'This comment is for a book/film'. Llavors a cada form per crear un comment donar la possibilitat de indicar el tipus d'item que toca.
 	# Llavors, per què anomenar-lo item? Dos fk, book i film
@@ -41,10 +44,19 @@ class Comment(models.Model):
     grade = models.SmallIntegerField(
         choices = GRADES,
 		default=0,
-		null=True
+		null=True #False
     )
+	#class Meta = [
+	#	ordering = ['commented_at']
+	#]
         
-        
+class Contact(models.Model):
+    """Model to store the messages"""
+    first_name = models.CharField(max_length=31)
+    last_name = models.CharField(max_length=31)
+    organisation = models.CharField(max_length=31)
+    content = models.CharField(max_length=511)
+
 class Genre(models.Model):
     """Model representing a book genre."""
     name = models.CharField(max_length=32, help_text='Enter a genre')
@@ -54,6 +66,7 @@ class Genre(models.Model):
         return self.name
 
 class Item(models.Model):
+    """Abstract model serving as base model for Book and Film."""
     created_at = models.DateField(auto_now_add=True)
     title = models.CharField(max_length=32)
     description = models.CharField(max_length=400, null=True, blank=True)
@@ -69,15 +82,26 @@ class Item(models.Model):
     )
     
     art = models.CharField(max_length=32, editable=False)
+	#Això podria ser un choice.
     
     LANG_CHOICES = (
         ('', 'Choose Languange'),
         ('EN', 'English'),
-        ('FR', 'Français'),
-        ('ES', 'Español'),
-        ('CA', 'Català'),
-        ('IT', 'Italiano'),
+        ('FR', 'French'),
+        ('ES', 'Spanish'),
+        ('CA', 'Catalan'),
+        ('IT', 'Italian'),
+		('PT', 'Portuguese'),
+		('GK', 'Greek'),
+		('GM', 'German'),
+		('AR', 'Arabic'),
 		('RU', 'Rusian'),
+		('JP', 'Japanese'),
+		('CH', 'Chinese'),
+		('TK', 'Turkish'),
+		('DN', 'Danish'),
+		('SW', 'Swedish'),
+		('NW', 'Norwegian'),
     )
     language = models.CharField(
 		'Original Language',
@@ -102,33 +126,41 @@ class Item(models.Model):
         """String for representing the model object."""
         return self.title
     
+    #def delete(self, *args, **kwargs #Try with file.delete
+	#	if self.image:
+	#	    name, storage = self.image.name, self.image.storage
+    #        if storage.exists(name):
+    #            storage.delete(name)
+    #    super().delete(*args, **kwargs)  # Call the "real" save() method.
+        
     # ????
     class meta:
         abstract = True
+		#ordering = ['title']
         
 
 def img_directory_path(instance, filename):
-    return '{0}/{1}_{2}'.format(instance.art, instance.title, filename)
+    return '{0}/{1}_{2}'.format(instance.art, instance.pk, instance.title)
     # return 'books/{0}_{1}'.format(instance.title, filename)
 
 class Book(Item):
     author = models.ForeignKey(Author, on_delete=models.SET_NULL, null=True)
-    image = models.ImageField(upload_to='uploads/books/', default='Books/books-default.jpg', null=True, blank=True)
+    image = models.ImageField(upload_to='uploads/books/', default='Books/books-default.jpg', null=True, blank=True) #Això a la superclass
     
-    def get_image(self):
+    def get_image(self): #i això
         if self.image:
             return self.image.url
         else:
-            return '/items/media/Books/books_default.jpg'
+            return '/items/media/{0}/default.jpg'.format(self.art) #Canvis !!
 	
     # ???? up in the superclass
-    class Meta:
-        permissions = (("can_edit_book","Edit book"),)
+    #class Meta:
+		#ordering = ['release_year'] per aplicar això cal override el valor de Item, és a dir iniciar així: class Meta(Item.Meta):
         
     
     def save(self, *args, **kwargs):
         if not self.id:
-            self.art = 'Books'
+            self.art = 'Book'
         super(Book, self).save(*args, **kwargs)
         
     def get_absolute_url(self):
@@ -143,11 +175,15 @@ class Book(Item):
 	
 class Film(Item):
 	director = models.ForeignKey(Author, on_delete=models.SET_NULL, null=True)
-	image = models.ImageField(upload_to='uploads/films/', default='uploads/films/films-default.jpg', null=True, blank=True)
+	image = models.ImageField(upload_to='uploads/films/', #Aquesta classe va a Item.
+							  default='uploads/films/films-default.jpg', #Això no convé
+							  null=True,
+							  blank=True
+	)
     
 	def save(self, *args, **kwargs):
 		if not self.id:
-			self.art = 'Films'
+			self.art = 'Film'
 		super(Film, self).save(*args, **kwargs)
         
 	def get_absolute_url(self):

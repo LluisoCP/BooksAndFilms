@@ -1,0 +1,47 @@
+{% extends "base_generic.html" %}
+
+{% block title %}<title>The B&amp;F Project</title>{% endblock %}
+
+{# {% block sidebar %}Això donarà problemes pel tema bootstrap{% endblock %} #}
+{% load static %}
+{% block jumbo %}
+	<div id="jumbo" class="jumbotron jumbotron-fluid" style="background: url({% static 'images/book-bg.jpg' %}) center center / cover no-repeat;">
+	  <div class="container">
+	  	  <div class="row">
+			  <h1 class="d-inline-block text-center text-sm-left">Books &amp; <br>Films</h1>
+	  	  </div>
+	  	  <div class="row">
+			  <a class="col-6 col-sm-4 col-lg-2 btn btn-lg" href="{% url 'index' %}" role="button">Home</a>
+	  	  </div>
+	  </div>
+	</div>
+{% endblock %}
+
+{% block contentheader %}
+	<h3>The Books and Films Project</h3>
+{% endblock %}
+
+{% block content %}
+	<div id="project">
+		<h4>Front-End</h4>
+		<p>
+			The presentational tier of this project rests on HTML, CSS and javaScript and makes use of jQuery and some Bootstrap features.
+			I've divided the content in four main blocks: jumbotron, sidebar, content and footer.
+			The jumbotron is a Bootstrap feature. I've overriden the background color and set a centered image instead.
+			The central space comprises the sidebar and content blocks. This space is distributed with the <i>row</i> and <i>col</i> Bootstrap classes. The sidebar is placed first as long as both blocks together occupy the full width (i.e. for medium to large screens), while it appears second when each block covers the full width (small screens). The sidebar accordion is carried out with the use of javaScript, playing with the heigths of the elements.
+			For unidentified users, clicking any item of the sidebar's edit section will display a modal informing the user the section is only available for logged users. This modal and its juggling with links' hrefs (and the &laquo;next&raquo; parameter, for the redirection after logging/signing up) is managed with jQuery. Of course, the sidebar displays differently depending on the user being logged in (he/she can log out) or not (he/she can register or login).
+			The content block of the welcome page contains a Bootstrap carousel that displays the name and image of every artpiece. Bootstrap is also responsible of the presentation of individual artpieces and artists through the <i>card</i> component.
+			I've used the fonts <a href="https://www.cufonfonts.com/font/freesans-2" target="_blank">Free Sans Regular</a> (for the bulk of the text) and <a href="https://www.1001freefonts.com/good-times.font" target="_blank">Goodtimes</a> (for the titles in the content block).
+			The favicon logo has been created with <a href="https://logomakr.com/" target="_blank">logomkr</a> and faviconised with <a href="https://realfavicongenerator.net/" target="_blank">realfavicongenerator</a>.
+		</p>
+		<h4>Back-End</h4>
+		<p>
+			The business logic of Books &amp; Films has been achieved with <a href="https://www.djangoproject.com/" target="_blank">Django</a> (Python) and a postgresql database, also managed by Django.
+			The models for <i>books</i> and <i>films</i> are derived from an abstact model called <i>item</i>, so that all common fields and functions are defined only once. Authors, whether writter or director, share a model called <i>author</i>, although this isn't an abstract model. There are also models for genres and comments. The comments section of each item has a field to rate the item. Then an average rate (rounded to tenths) is shown in the item's details page. The comments model corresponds to the form below.
+			The admin space, which evidently is not accessible to visitors, depends on a django app that takes care of the access permissions (via superuser), display and management. From this space, the superuser can make all sort of changes to the database items (modify, delete, etc.).
+			There are forms to create new authors and items (books or films), to leave a comment, to register and to login. The forms are styled with the <a href="https://github.com/django-crispy-forms/django-crispy-forms" target="_blank">django-crispy-forms</a> app. The items forms (both books and films) allow to upload an image for the item. This field is not required, so an item could lack of image. This is handled by a python function in the item (abstract) model. The function checks if the item has an image and if so, it returns it. Otherwise the path to a default image (which differs for books and films) is returned. The user form is managed by the django auth app. It allows register, login, logout and password recovery via mail.
+			There are some restrictions in the views so that only registered and identified visitors can create new items. These are handled by the django decorator @login_required, that redirects to login if an unregistered user taps the address in the bar (access through the navigation sidebar is already restricted as explained above). The list views are paginated by 6 using django pagination.
+			The search section is developed with a python function written by myself. It only takes into account the three firsts terms introduced and returns results for titles of artpieces and artists' names.
+		</p>
+	</div>
+{% endblock %}

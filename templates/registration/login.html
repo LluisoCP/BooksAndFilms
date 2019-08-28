@@ -17,7 +17,7 @@
   {% if user.is_authenticated %}
     <p class="logintro">Your account doesn't have acces to this page. To proceed, please login with an account that has access.</p>
   {% else %}
-    <p class="logintro">Introduce your credentials to log in.</p>
+    <p class="logintro">Introduce your credentials to log in or go to <a href="{% url 'signup' %}">sign up</a> if you're not a member yet.</p>
   {% endif %}
 {% endif %}
 

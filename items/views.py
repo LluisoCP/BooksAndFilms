@@ -14,7 +14,7 @@ from django.db.models import Q
 def index(request):
     """View function for the main page if the site"""
     num_books = Book.objects.all().count()
-    img_books = Book.objects.exclude(pk=2).exclude(pk=7)
+    img_books = Book.objects.exclude(pk=2).exclude(pk=7) # Eliminar
     num_img_books = img_books.count()
     img_data = range(num_img_books)
 	#img_books = Book.objects.exclude(Q(pk=2) | Q(pk=7))
@@ -25,6 +25,9 @@ def index(request):
     }
     return render(request, 'index.html', context=context)
 
+# THE PROJECT VIEW
+def project(request):
+    return render(request, 'project.html')
 
 # MODEL LIST VIEWS
 class BookListView(ListView):
@@ -33,6 +36,7 @@ class BookListView(ListView):
     
 #class FilmListView(ListView):
 #	model = Film
+#	paginate_by = 6
 
 class AuthorListView(ListView):
     model = Author
@@ -95,10 +99,12 @@ def book_detail(request, pk):
 def author_detail(request, pk):
     author = get_object_or_404(Author, pk=pk)
     books = Book.objects.filter(author__pk=pk)
-    #films = Film.objects.filter(author__pk=pk)
+	#if author.role == 'Director':
+    	#films = Film.objects.filter(author__pk=pk)
     context = {
         'author': author,
         'books': books
+		#'items': 'items'
     }
     return render(request, 'items/artist_detail.html', context)
 

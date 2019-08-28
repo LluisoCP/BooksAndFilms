@@ -1,6 +1,3 @@
-
-
-
 var lists = document.querySelectorAll('.accordion ul');
 /* Close lists by default (Do I want this?) */
 for (var i=0; i<lists.length; i++) {

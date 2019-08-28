@@ -1,31 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  {% block title %}<title>Books &amp; Films</title>{% endblock %}
   <meta charset="utf-8">
+  {% block title %}<title>Books &amp; Films</title>{% endblock %}
+  <meta name="author" content="Lluis Camps">
+  <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
   <!-- General CSS in static file -->
   {% load static %}
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <!-- Favicon -->
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="{% static 'images/safari-pinned-tab.svg' %}" color="#5bbad5">
+  <link rel="icon" href="{% static 'images/favicon.ico' %}">
+  <link rel="apple-touch-icon" sizes="180x180" type="image/png" href="{% static 'images/apple-touch-icon.png' %}">
+  <link rel="icon" type="image/png" sizes="32x32" type="image/png" href="{% static 'images/favicon-32x32.png' %}">
+  <link rel="icon" type="image/png" sizes="16x16" type="image/png" href="{% static 'images/favicon-16x16.png' %}">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <!-- <style>
+	  #jumbo {
+		  background: url("{% static 'images/book-bg.jpg' %}") center center / cover no-repeat;
+	  }
+  </style>-->
 </head>
 <body>
+  {% if not user.is_authenticated %}
+	<section id="modal" class="closed">
+		<article>
+			<h4 class="text-center">You must be logged in to access this page.</h4>
+			<p class="d-flex justify-content-center align-items-center p-1 m-0">
+				<a id="login" href="{% url 'login' %}" class="btn btn-sm btn-success mx-2">Login</a>
+				<a id="signup" href="{% url 'signup' %}" class="btn btn-sm btn-info mx-2">Sign Up</a>
+				<button id="close-modal" class="btn btn-sm btn-dark mx-2">Cancel</button>
+			</p>
+		</article>
+	</section>
+  {% endif %}
+	
   {% block navbar %}{% endblock %}
+	
   {% block jumbo %}
-    <div id="jumbo" class="jumbotron jumbotron-fluid">
-	  <div class="container">
-		  <h1 class="display-4">Welcome to Books &amp; Films</h1>
-		  <p class="lead">A humble website about remarkable artpieces in the fields of literature and cinema.</p>
-		  <hr class="my-4">
-		  <p>It's been built with django at the backend, bootstrap at the frontend and lcp skills on everything else.</p>
-		  <a class="btn btn-lg" href="#" role="button">The Project</a>
-	  </div>
+    <div id="jumbo" class="jumbotron jumbotron-fluid" style="background: url({% static 'images/bookfilm2.jpeg' %}) center center / cover no-repeat;">
+  	  <div class="container">
+        <div class="row">
+    		<h1 class="d-inline-block text-center text-sm-left">Books &amp; <br> Films</h1>
+        </div>
+        <div class="row">
+  		    <a class="col-6 col-sm-4 col-lg-2 btn btn-lg" href="{% url 'project' %}" role="button">The Project</a>
+        </div>
+  	  </div>
     </div>
   {% endblock %}
+	
   <div class="container-fluid" style="min-height: 600px;">
 	<div id="main" class="row">
 	  <div id="aside" class="col-12 col-md-3 col-lg-2 order-2 order-md-1 pt-3">
+		  
   		{% block sidebar %}
 		<div class="accordion">
           <h5 class="text-center">Main</h5>
@@ -57,20 +90,23 @@
           <h5 class="text-center">Edit</h5>
           <hr>
           <ul class="sidebar-nav text-center">
-              <li><a href="{% url 'add-author' %}">Add Artist</a></li>
-              <li><a href="{% url 'upload-book' %}">Add Book</a></li>
-              <li><a href="#">Add Film</a></li>
+              <li><a class="loginRequired" href="{% url 'add-author' %}">Add Artist</a></li>
+              <li><a class="loginRequired" href="{% url 'upload-book' %}">Add Book</a></li>
+              <li><a class="loginRequired" href="#">Add Film</a></li>
           </ul>
 		  <hr>
         </div>
 		{% endblock %}
+		  
 	  </div>
       <div id="content" class="col-12 col-md-9 col-lg-10 px-0 order-1 order-md-2">
 		<header id="contentheader">
 		{% block contentheader %}{% endblock %}
 		  <hr>
 		</header>
+		  
         {% block content %}{% endblock %}
+		  
 		{% block pagination %}
 		  {% if is_paginated %}
 			<div class="pagination">
@@ -90,9 +126,11 @@
 			</div>
 		  {% endif %}
 		{% endblock %}
+		  
       </div>
 	</div>
   </div>
+	
   {% block footer %}
 	<footer>
         <div id="social">
@@ -102,12 +140,20 @@
             <a href="tel:0769605237"><i class="fas fa-phone-square"></i></a>
         </div>
         <div id="credits">
-            <span>&copy; lcpselocurra</span>
+            <span><i class="fab fa-creative-commons"></i> lcpselocurra</span>
         </div>
     </footer>
   {% endblock %}
+	
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
   {% block scripts %}{% endblock %}
-	<script src="{% static 'js/script.js' %}"></script>
+  
+  <script src="{% static 'js/accordion.js' %}"></script>
+  {% if not user.is_authenticated %}
+ 	<script src="{% static 'js/modal.js' %}"></script>
+  {% endif %}
+  <script src="{% static 'js/sliderControls.js' %}"></script>
 </body>
 </html>
 
