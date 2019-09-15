@@ -1,0 +1,14 @@
+.searchintro {
+	padding: 0 15%;
+	color: white;
+	font-weight: 700;
+}
+form.form {
+	border: 3px solid #0e3cd3;
+	border-radius: 10px;
+	width: 80%;
+	margin: 0 auto;
+	padding: 20px;
+	background-color: white;
+	margin-bottom: 20px;
+}

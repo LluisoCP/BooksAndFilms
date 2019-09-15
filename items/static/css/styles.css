@@ -13,6 +13,9 @@ html, body {
 	width: 100vw;
 	overflow: visible;
 }
+body {
+	padding-right: 0 !important;
+}
 a, a:hover {
 	color: inherit;
 	text-decoration: none;
@@ -30,7 +33,7 @@ a, a:hover {
 #project a:hover {
 	color: violet;
 }
-/* Modal */
+/*Login Required Modal */
 #modal {
     position: fixed;
     top: 0;
@@ -59,26 +62,68 @@ a, a:hover {
 	background-color: rgb(217,217,221);
 	padding: 20px 0;
 }
+/*Has Commented Modal */
+#has-commented {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+	width: 100vw;
+	z-index: 10;
+    background-color: rgba(20,20,20,.5);
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1.0);
+    transition: all .3s linear;
+}
+#has-commented.out {
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.1);
+}
+#has-commented article {
+	position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    height: 150px;
+	width: 600px; /* Media query */
+	background-color: rgb(217,217,221);
+	padding: 20px 0;
+	transition: top .3s linear;
+}
+#has-commented.out article {
+    top: -300px;
+}
+#has-commented button {
+	border: 2px solid black;
+}
+
 /*Jumbo*/
-#jumbo{
+/* Mobile First */
+#jumbo {
 	margin-bottom: 0;
 	color: white;
 	font-weight: 700;
 	border-bottom: 5px solid #a9b6bc;
+	padding: 0;
 }
-
+/* Jumbo title */
 #jumbo .container .row h1 {
 	font-family: 'Luckiest Guy', cursive;
 	padding: 10px;
 	padding-bottom: 0;
-	border-radius: 2px;
 	background-color: rgba(100,100,100,.6);
 	margin-bottom: 0;
+	flex: 1
 }
+/* Jumbo buttons (Home & Project) */
 #jumbo .container .row > a {
-	margin-top: 2em;
+	margin-top: 10rem;
+	margin-bottom: 0;
 	color: white;
-	border: 1px solid white;
+	font-weight: 700;
+	border: 1px solid black;
 	background-color: #66a810;
 	transition: all 0.2s linear;
 }
@@ -86,24 +131,78 @@ a, a:hover {
 	color: black;
 	background-color: #96f718;
 }
-#jumbo .container p {
-	margin-top: 2em;
-	font-size: 1.3em;
-	/*
-	padding: 5px;
-	border-radius: 2px;
-	background-color: rgba(100,100,100,.6);
-	*/
+/* Breadcrumb */
+#jumbo #breadcrumb {
+	margin-top: 10rem;
+	background: linear-gradient(to right, rgba(100,100,100,.8), rgba(100,100,100,.6) 50%, rgba(100,100,100,0) 100%);
 }
-#jumbo .container p a {
+#jumbo .container .row h1 br, #jumbotext, #jumbo .container #breadcrumb .breadcrumb span {
+	display: none; /* Un per un */
+}
+#jumbo #breadcrumb nav {
+	padding-left: 10px;
+}
+#jumbo #breadcrumb ol {
+	font-size: 1.2em;
+	line-height: 1em;
+	background-color: transparent;
+	padding: .5rem 0;
+	margin-bottom: 0;
+}
+#jumbo #breadcrumb ol li.active {
+	color: white;
+}
+#jumbo #breadcrumb ol li:not(.active) {
 	color: rgb(252,238,45);
 	transition: color .2s linear;
 }
-#jumbo .container p a:hover {
+#jumbo #breadcrumb ol li:not(.active):hover {
 	color: violet;
 }
-/*Aside*/
+#jumbo #breadcrumb li.breadcrumb-item::before {
+	color: white;
+}
+/* Text after breadcrumb */
+#jumbo #jumbotext {
+	padding-left: 10px;
+	margin-bottom: .5rem;
+	font-size: .9em;
+}
+#jumbo #jumbotext a {
+	color: rgb(252,238,45);
+	transition: color .2s linear;
+}
+#jumbo #jumbotext a:hover {
+	color: violet;
+}
+/* After */
+@media(min-width: 576px) {
+	#jumbo {
+		padding-top: 2rem;
+		padding-bottom: 1rem;
+	}
+	/* Jumbo title */
+	#jumbo .container .row h1 {
+		border-radius: 2px;
+		flex: none;
+	}
+	#jumbo #breadcrumb {
+		margin-top: 4em;
+		border-radius: 2px;
+	}
+	#jumbo #jumbotext {
+		display: block;
+	}
+	#jumbo .container .row h1 br, #jumbo .container #breadcrumb .breadcrumb span {
+		display: inline;
+	}
+	#jumbo .container .row > a {
+		margin-top: 1rem;
+		margin-bottom: 3rem;
+	}
+}
 
+/*Aside*/
 #aside {
 	color: white;
 	background-color: #5e85a3;
@@ -118,6 +217,7 @@ ul.text-center {
 	cursor: pointer;
 	font-size: 2em;
 	line-height: 2;
+	font-family: 'Luckiest Guy', cursive;
 }
 .accordion hr {
 	background-color: black;
@@ -133,6 +233,11 @@ ul.text-center {
 .accordion ul li {
 	font-size: 1.5em;
 	line-height: 1.5;
+	font-weight: 700;
+	transition: color .2s linear;
+}
+.accordion ul li:hover {
+	color: rgb(252,238,45);
 }
 /*FOOTER*/
 /*Comú*/
@@ -163,7 +268,6 @@ footer {
 	font-weight: bold;
 }
 
-
 /* MAIN CONTENT */
 /*Border=Comú - BG=Index+Llistes*/
 #content {
@@ -171,32 +275,84 @@ footer {
 	border-left: 5px solid #a9b6bc;/*Aquest és per grans pantalles*/
 	background-color: #363742; /*Aquest és per l'index i les llistes*/
 }
+#content .btn-primary {/* Això afecta al btn del carousel */
+	color: white;
+	font-weight: 700;
+	background-color: #0e3cd3;
+}
+#content .btn-primary:hover {
+	background-color: #51a7f7;
+	color: black;
+}
 /*Title of Content (in header)*/
 /*Comú*/
-#contentheader {
+.contentheader {
 	text-align: center;
+	color: white;
 }
-#contentheader h3 {
+.contentheader h3 {
 	margin-bottom: 0;
 	margin-top: 30px;
 	padding: 10px;
 	padding-bottom: 0;
-	color: white;
 	font-family: Tahoma, Geneva, sans-serif;
 	font-family: 'Luckiest Guy', cursive;
 }
-#contentheader hr {
+.contentheader hr {
 	background-color: white;
 	border-radius: 1px;
 	width: 30%;
 	height: 3px;
 }
-
-/*CONTENT BOOKLIST, FILMLIST*/
-/* This is the original*/
-#content .card-body {
-	background-color: rgb(220,225,225);
+/*Results or searches and items by genre*/
+.contentheader p {
+	font-weight: 700;
+	margin: 20px auto 30px;
 }
+.contentheader p a {
+	color: rgb(252,238,45);
+	transition: color .2s linear;
+}
+.contentheader p a:hover {
+	color: violet;
+}
+/* 0 results message by genre or in lists*/
+.no-items {
+	color: white;
+	font-weight: 700;
+	margin: 3rem 2rem 0;
+	text-align: center;
+}
+.no-items a {
+	color: rgb(252,238,45);
+	transition: color .2s linear;
+}
+.no-items a:hover {
+	color: violet;
+}
+/*CONTENT BOOKLIST, FILMLIST*/
+#content #books > div .card {
+	padding: .5rem;
+	border-color: black;
+	background-color: rgb(221,225,225);
+}
+#content #books > div .card .card-img-top {
+	object-fit: contain;
+	max-height: 300px; 
+}
+/* Book List */
+/* AIXÒ HI HA QUE REVISAR-HO */
+#books .card a.btn {
+	font-weight: 700;
+	background-color: #0e3cd3;
+	border: 2px solid black;
+	transition: all .2s linear;
+}
+#books .card a.btn:hover {
+	background-color: #51a7f7;
+	color: black;
+}
+
 /*Artist List*/
 .artist {
 	background-color: white;
@@ -209,7 +365,7 @@ footer {
 .artist h4 {
 	text-align: center;
 	width: 90%;
-	margin: 0 auto;
+	margin: 0 auto 1rem;
 }
 .artist p {
 	margin: 0 auto;
@@ -228,18 +384,82 @@ footer {
 	border-radius: 5px;
 	background-color: rgb(220,225,225);
 }
-/*FORMS*/
-/*This is ok only for large screens?*/
-#content form.upload {
-	border: 2px solid red;
-	border-radius: 10px;
-	width: 80%;
-	margin: 0 auto 20px;
-	padding: 20px;
+#content .pagination .page-links span {
+	font-weight: 700;
+	margin-left: .75rem;
+	margin-right: .75rem
 }
+/* Genres List*/
+.genres ul li {
+	background-color: rgba(147,196,168);
+	padding-right: .75rem;
+}
+.genres ul a {
+	display: block;
+	height: 100%;
+	width: 100%;
+	font-size: .8rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	transition: color .2s linear;
+}
+.genres ul a:hover {
+	color: white;
+}
+.genres ul a .badge {
+	float: right;
+	line-height: 1.5em;
+	padding-right:  .75em;
+	padding-left: .75em;
+	border-radius: 40%;
+}
+.genres {
+	width: 100%;
+	margin: 0 auto;
+}
+@media(min-width: 350px) {
+	.genres {
+		width: 80%;
+		margin-bottom: 2rem;
+	}
+	.genres ul li {
+		padding-right: 1.25rem;
+	}
+	.genres ul a {
+		font-size: 1.2em;
+	}
+	.genres ul a .badge {
+		position: absolute;
+		top: 50%;
+		right: 1rem;
+		transform: translateY(-50%);
+	}
+}
+@media(min-width: 576px) {
+	.genres {
+		width: 50%;
+	}
+}
+/* Genre Items */
+#genre-items .card-img-top {
+	max-height: 300px; 
+}
+
+#genre-items .card-body .card-title {
+	text-transform: uppercase;
+	font-weight: 700;
+}
+#genre-items .card-body .card-text {
+	font-weight: 700;
+}
+#genre-items .card-body a {
+	font-weight: 700;
+}
+
+/*FORMS*/
 /*artist+book+signup+login+reset*/
 form.form {
-	border: 2px solid red;
+	border: 3px solid #0e3cd3;
 	border-radius: 10px;
 	width: 80%;
 	margin: 0 auto;
@@ -247,18 +467,47 @@ form.form {
 	background-color: white;
 	margin-bottom: 20px;
 }
-/*Log In*/
-p.logintro, p.signupintro, .searchintro {
-	margin-left: 15%;
-	color: white;
-	font-weight: bold;
+
+/* File Buttons 
+.form input[type="file"] {
+	background-color: #1148fc;
+}*/
+/* Centrar el button (totes) */
+#submit {
+	text-align: center;
 }
-p.logintro a {
+#submit .btn-danger {
+	font-weight: 700;
+	background-color: #f4090d;
+}
+#submit .btn-danger:hover {
+	background-color: #f7676a;
+	color: black;
+}
+/*Log In*/
+p.logintro, .searchintro {
+	padding: 0 15%;
+	color: white;
+	font-weight: 700;
+}
+p.logintro a, p.signupintro a {
+	font-weight: 700;
 	color: red;
 	transition: color .2s linear;
 }
 p.logintro a:hover {
 	color: violet;
+}
+/* Lost Password? & Already a member? */
+.form ~ p.logintro, .form ~ p.signupintro {
+	text-align: center;
+	font-size: 1.5rem;
+	margin-bottom: 1.5rem;
+	padding: 0;
+	background: linear-gradient(to right, rgba(240,240,240,0), rgba(240,240,240,0) 15%, rgba(240,240,240,.6) 40%, rgba(240,240,240,.6) 60%, rgba(240,240,240,0) 85%, rgba(240,240,240,0) 100%);
+}
+.form ~ p.logintro a:hover, .form ~ p.signupintro a:hover {
+	color: black;
 }
 .password-reset {
 	color: white;
@@ -276,12 +525,31 @@ p.password-reset small {
 .password-reset.failed {
     color: red;
 }
-
+/* Upload book genres checkbox*/
+.form #div_id_genres > div {
+	display: flex;
+	flex-wrap: wrap;
+}
+.form #div_id_genres > div .checkbox {
+	flex: 0 1 50%;
+}
+.form #div_id_genres > div small {
+	flex: 1 1 100%;
+}
+@media (min-width: 700px) {
+	.form #div_id_genres div {
+		padding-left: 10px;
+	}
+	.form #div_id_genres div .checkbox {
+		flex-basis: calc(100% / 3);
+	}
+}
 /*Custom carousel*/
 #bookcarousel .carousel-item {
 	height: 600px;
 }
 #bookcarousel #carouseltext {
+	font-weight: 700;
 	width: 70%;
 	background-color: rgba(0,0,0,0.7);
 	border-radius: 10px;
@@ -295,12 +563,17 @@ p.password-reset small {
 	margin-top: .5em;
 	margin-bottom: 0;
 }
-/* Carousel Controls */
+/* Carousel Controls */	
 #controls {
+	border: 1px solid black;
+	border-radius: .2rem;
 	position: absolute;
 	bottom: 0;
 	left: 50%;
 	transform: translateX(-50%);
+}
+#controls button:hover {
+	color: black;
 }
 
 /*DETAILS*/
@@ -308,13 +581,15 @@ p.password-reset small {
 #item {
 	margin: 0 30px 30px;
 	padding: 30px 20px 10px;
-	background-color: white;
-	border: 2px solid red;
+	background-color: rgb(240,240,245);
+	/*background-color: white;*/
+	border: 3px solid #0e3cd3;
 	border-radius: 10px;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
 }
+/* Here media queries are in order to make it responsive */
 #item #image {
 	position: relative;
 	flex: 0 1 35%;
@@ -323,7 +598,7 @@ p.password-reset small {
 	width: 80%;
 	text-align: center;
 	font-weight: bold;
-	display: inline-block;
+	/*display: inline-block;*/
 	padding: 5px 15px;
 	background-color: rgba(255,255,255,0.7);
 	border-radius: 5px;
@@ -337,50 +612,114 @@ p.password-reset small {
 	flex: 0 1 61%;
 	align-self: center;
 }
+#item #bookdesc p {
+	font-weight: 700;
+}
 #item #grade {
-	border: 2px solid black;
-	border-radius: 10px;
 	padding: 20px 30px;
 	margin: 20px 5%;
 	flex: 0 1 90%;
 }
+#item #grade .progress {
+	background-color: white;
+	border: 3px solid black;
+}
+#item #grade h5 {
+	font-weight: 700;
+}
 #item #comments {
 	margin: 20px 0;
+	flex: 1;
+}
+#item #comments h4 {
+	text-transform: uppercase;
+	font-weight: 900;
+	text-align: center;
+	margin-bottom: 1.5rem;
 }
 #item #comments .comment {
-	margin: 10px 0;
+	margin: 0;
+	/*margin: .5rem 0;*/
+	padding: .5rem;
+	padding-left: 2em;
+	border-top: 2px solid black;
 }
-#item #comments .comment {
-	margin-left: 20px;
-	padding: 10px;
-	border: 2px solid black;
-	border-radius: 10px;
+#item #comments .comment.last-comment {
+	border-bottom: 2px solid black;
+}
+#item #comments .comment .commentdata p {
+	margin-top: 1rem;
 }
 #item #comments .comment .content {
 	font-style: italic;
 }
 #item #comments #commentbook {
 	margin-top: 20px;
+	text-align: center;
+}
+#item #comments #commentbook h4 {
+	margin-bottom: 1rem;
+}
+#item #comments #commentbook p {
+	font-weight: 700;
+}
+#item #no-comments {
+	text-align: center;
+	flex: 1;
+	margin: 2rem auto;
+}
+#item #no-comments h4 {
+	font-weight: 700;
+	margin-bottom: 1.25rem
+}
+#item #no-comments button {
+	background-color: #96f718;
+	font-weight: 700;
+	color: black;
+	border-color: black;
+	border-width: 2px;
+}
+#item #no-comments button:hover {
+	background-color: rgb(170,255,100);
 }
 
-/*Artist*/
+/* Search Results */
+#searchresults {
+	width: 80%;
+	margin: 10px 10% 20px;
+	padding: 25px 40px;
+	background-color: white;
+	border-radius: 5px;
+	border: 3px solid #0e3cd3;
+}
+#searchresults li {
+	font-weight: 700;
+}
+#searchresults h4:not(:first-of-type) {
+	margin-top: 1em;
+}
+#searchresults a {
+	color: #0e3cd3;
+	transition: color .2s linear;
+}
+#searchresults a:hover {
+	color: #51a7f7;
+}
+/* Artist */
 section.artist-detail {
 	width: 80%;
 	margin: 10px 10% 20px;
 	padding: 25px 40px;
 	background-color: white;
 	border-radius: 5px;
-	border: 2px solid red;
-	
+	border: 3px solid #0e3cd3;
 }
-
 section.artist-detail h2 {
 	margin-bottom: .7em;
 }
 section.artist-detail .artist-data {
 	margin: 40px 0 40px 2em;
 }
-
 section.artist-detail .artpiece {
 	margin: 0 0 20px 2em;
 }
@@ -396,22 +735,3 @@ section.artist-detail .artpiece small {
 section.artist-detail .artpiece h5::before {
 	content: '';
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

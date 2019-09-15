@@ -2,30 +2,53 @@
 
 {% block title %}<title>All Books</title>{% endblock %}
 {% load static %}
+
+{% block styles %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/items.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/has-commented.css' %}">
+{% endblock %}
+
 {% block jumbo %}
     <div id="jumbo" class="jumbotron jumbotron-fluid" style="background: url({% static 'images/book-bg.jpg' %}) center center / cover no-repeat;">
         <div class="container">
-          <div class="row">
-            <h1 class="d-inline-block text-center text-sm-left">Our <br>Books <br>Selection</h1>
-          </div>
-          <div class="d-none d-sm-inline-block">
-              <p>
-                Here you'll find the books uploaded by our users and graded by the community.<br>
-                Feel free to comment and, if you're <a href="{% url 'signup' %}">registered</a>, upload a masterpiece!
-              </p>
-          </div>
+            <section class="row">
+                <h1 class="d-inline-block text-center text-sm-left">Books &amp; <br>Films</h1>
+            </section>
+            <section id="breadcrumb" class="row">
+                <nav class="col-12" aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <span>You are in: &nbsp;</span>
+                        <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Books</li>
+                    </ol>
+                </nav>
+                <p id="jumbotext" class="col-12">
+                    Here you'll find the books uploaded by our users and graded by the community.
+                </p>
+            </section>
         </div>
     </div>
+    {% if has_commented %}
+    <section id="has-commented" class="out">
+        <article>
+            <h4 class="text-center">Your book has been added.</h4>
+            <h4 class="text-center">Thanks for uploading!</h4>
+            <p class="d-flex justify-content-center align-items-center p-1 m-0">
+                <button id="close-commented" class="btn btn-sm btn-light">Close</button>
+            </p>
+        </article>
+    </section>
+    {% endif %}
 {% endblock %}
 
 {% block contentheader %}
-  <h3 class="text-center">Some Awesome Books</h3>
+  <h3>Some Awesome Books</h3>
 {% endblock %}
 
 {% block content %}
 
   {% if book_list %}
-	<div class="row no-gutters">
+	<div id="books" class="row no-gutters">
     {% for book in book_list %}
 	  <div class="col-12 col-xl-6">
         <div class="card my-2 mx-0 mx-md-3">
@@ -35,16 +58,22 @@
 			  <h6 class="card-subtitle mb-2 text-muted">By {{ book.author }}</h6>
               <p class="card-text">
                   {{ book.description }}
+                  {% if book.display_genre %}
                   <br>
                   Genres: {% for genre in book.genres.all %} {{ genre }}{% if not forloop.last %}, {% endif %}{% endfor %}
+                  {% endif %}
               </p>
-              <a href="{{ book.get_absolute_url }}" class="btn btn-primary">Go to Book</a>
+              <a href="{{ book.get_absolute_url }}" class="btn btn-primary btn-block">Go to Book</a>
             </div>
         </div>
 	  </div>
     {% endfor %}
 	</div>
   {% else %}
-    <p>Sorry! We have no books available</p>
+    <p class="no-items">Sorry! We have no books available. Go <a href="{% url 'upload-book' %}">add one</a>!</p>
   {% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/hasCommentedModal.js' %}" type="text/javascript"></script>
 {% endblock %}

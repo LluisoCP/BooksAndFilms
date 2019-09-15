@@ -1,8 +1,32 @@
 {% extends "base_generic.html" %}
+{% block title %}<title>User Login</title>{% block %}
+{% load static %}
+{% block styles %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/registration.css' %}">
+{% endblock %}
+
+{% block jumbo %}
+    <div id="jumbo" class="jumbotron jumbotron-fluid" style="background: url({% static 'images/bookfilm2.jpeg' %}) center center / cover no-repeat;">
+        <div class="container">
+            <section class="row">
+                <h1 class="d-inline-block text-center text-sm-left">Books &amp; <br>Films</h1>
+            </section>
+            <section id="breadcrumb" class="row">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <span>You are in: &nbsp;</span>
+                        <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">User Log In</li>
+                    </ol>
+                </nav>
+            </section>
+        </div>
+    </div>
+{% endblock %}
 
 {% if next %}
   <form action="/login/?next={{ next }}" method="post" >
-{%else%}
+{% else %}
   <form action="/login/" method="post" >
 {% endif %}
 

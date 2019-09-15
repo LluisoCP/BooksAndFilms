@@ -3,18 +3,35 @@
 {% block title %}<title>The B&amp;F Project</title>{% endblock %}
 
 {# {% block sidebar %}Això donarà problemes pel tema bootstrap{% endblock %} #}
+{% load crispy_forms_tags %}
 {% load static %}
+{% block styles %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/project.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/has-commented.css' %}">
+{% endblock %}
+
 {% block jumbo %}
-	<div id="jumbo" class="jumbotron jumbotron-fluid" style="background: url({% static 'images/book-bg.jpg' %}) center center / cover no-repeat;">
+	<div id="jumbo" class="jumbotron jumbotron-fluid" style="background: url({% static 'images/bookfilm2.jpeg' %}) center center / cover no-repeat;">
 	  <div class="container">
 	  	  <div class="row">
 			  <h1 class="d-inline-block text-center text-sm-left">Books &amp; <br>Films</h1>
 	  	  </div>
-	  	  <div class="row">
+	  	  <div class="row justify-content-center justify-content-sm-start">
 			  <a class="col-6 col-sm-4 col-lg-2 btn btn-lg" href="{% url 'index' %}" role="button">Home</a>
 	  	  </div>
 	  </div>
 	</div>
+	{% if has_commented %}
+    <section id="has-commented" class="out">
+        <article>
+            <h4 class="text-center">Your message has been recorded.</h4>
+            <h4 class="text-center">Thanks for participating!</h4>
+            <p class="d-flex justify-content-center align-items-center p-1 m-0">
+                <button id="close-commented" class="btn btn-sm btn-light">Close</button>
+            </p>
+        </article>
+    </section>
+    {% endif %}
 {% endblock %}
 
 {% block contentheader %}
@@ -27,21 +44,51 @@
 		<p>
 			The presentational tier of this project rests on HTML, CSS and javaScript and makes use of jQuery and some Bootstrap features.
 			I've divided the content in four main blocks: jumbotron, sidebar, content and footer.
+		</p>
+		<p>
 			The jumbotron is a Bootstrap feature. I've overriden the background color and set a centered image instead.
 			The central space comprises the sidebar and content blocks. This space is distributed with the <i>row</i> and <i>col</i> Bootstrap classes. The sidebar is placed first as long as both blocks together occupy the full width (i.e. for medium to large screens), while it appears second when each block covers the full width (small screens). The sidebar accordion is carried out with the use of javaScript, playing with the heigths of the elements.
 			For unidentified users, clicking any item of the sidebar's edit section will display a modal informing the user the section is only available for logged users. This modal and its juggling with links' hrefs (and the &laquo;next&raquo; parameter, for the redirection after logging/signing up) is managed with jQuery. Of course, the sidebar displays differently depending on the user being logged in (he/she can log out) or not (he/she can register or login).
+		</p>
+		<p>
 			The content block of the welcome page contains a Bootstrap carousel that displays the name and image of every artpiece. Bootstrap is also responsible of the presentation of individual artpieces and artists through the <i>card</i> component.
-			I've used the fonts <a href="https://www.cufonfonts.com/font/freesans-2" target="_blank">Free Sans Regular</a> (for the bulk of the text) and <a href="https://www.1001freefonts.com/good-times.font" target="_blank">Goodtimes</a> (for the titles in the content block).
+			Details page.
+			Comments. Progress bar.
+			I've used the fonts <a href="https://www.cufonfonts.com/font/freesans-2" target="_blank">Free Sans Regular</a> (for the bulk of the text) and <a href="https://www.1001freefonts.com/good-times.font" target="_blank">Change</a> (for the titles in the content block).
 			The favicon logo has been created with <a href="https://logomakr.com/" target="_blank">logomkr</a> and faviconised with <a href="https://realfavicongenerator.net/" target="_blank">realfavicongenerator</a>.
 		</p>
 		<h4>Back-End</h4>
 		<p>
 			The business logic of Books &amp; Films has been achieved with <a href="https://www.djangoproject.com/" target="_blank">Django</a> (Python) and a postgresql database, also managed by Django.
+		</p>
+		<p>
 			The models for <i>books</i> and <i>films</i> are derived from an abstact model called <i>item</i>, so that all common fields and functions are defined only once. Authors, whether writter or director, share a model called <i>author</i>, although this isn't an abstract model. There are also models for genres and comments. The comments section of each item has a field to rate the item. Then an average rate (rounded to tenths) is shown in the item's details page. The comments model corresponds to the form below.
 			The admin space, which evidently is not accessible to visitors, depends on a django app that takes care of the access permissions (via superuser), display and management. From this space, the superuser can make all sort of changes to the database items (modify, delete, etc.).
+		</p>
+		<p>
 			There are forms to create new authors and items (books or films), to leave a comment, to register and to login. The forms are styled with the <a href="https://github.com/django-crispy-forms/django-crispy-forms" target="_blank">django-crispy-forms</a> app. The items forms (both books and films) allow to upload an image for the item. This field is not required, so an item could lack of image. This is handled by a python function in the item (abstract) model. The function checks if the item has an image and if so, it returns it. Otherwise the path to a default image (which differs for books and films) is returned. The user form is managed by the django auth app. It allows register, login, logout and password recovery via mail.
-			There are some restrictions in the views so that only registered and identified visitors can create new items. These are handled by the django decorator @login_required, that redirects to login if an unregistered user taps the address in the bar (access through the navigation sidebar is already restricted as explained above). The list views are paginated by 6 using django pagination.
-			The search section is developed with a python function written by myself. It only takes into account the three firsts terms introduced and returns results for titles of artpieces and artists' names.
+		</p>
+		<p>
+			There are some restrictions in the views so that only registered and identified visitors can create new items. These are handled by the django decorator @login_required, that redirects to any desired page (<i>login</i> by default) if an unregistered user taps the address in the bar (access through the navigation sidebar is already restricted as explained above). The list views are paginated by 6 using django pagination.
+		</p>
+		<p>
+			The search section works with a python function written by myself. It only takes into account the three firsts terms introduced and uses django's class query methods to filter the items (authors, books and/or films) whose names match one or more search terms. It returns results for titles of artpieces and artists' full names.
+		</p>
+		<p>
+			DEPLOYMENT
 		</p>
 	</div>
+	<form class="form" action="" method="POST" accept-charset="utf-8">
+		<h4 class="text-center">Contact Form</h4>
+		<small style="margin-bottom:30px;display:block;">All fields are required.</small>
+		{% csrf_token %}
+		{{ form|crispy }}
+		<div id="submit">
+			<button type="submit" class="btn btn-primary">Send</button>
+		</div>
+	</form>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/hasCommentedModal.js' %}" type="text/javascript"></script>
 {% endblock %}

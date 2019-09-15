@@ -2,14 +2,14 @@
 
 {% load crispy_forms_tags %}
 
-{% block title %}<title>Add a Book</title>{% endblock %}
+{% block title %}<title>Add a Film</title>{% endblock %}
 {% load static %}
 {% block styles %}
-  <link rel="stylesheet" type="text/css" href="{% static 'css/create.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/create.css' %}">
 {% endblock %}
 
 {% block jumbo %}
-    <div id="jumbo" class="jumbotron jumbotron-fluid" style="background: url({% static 'images/book-bg.jpg' %}) center center / cover no-repeat;">
+    <div id="jumbo" class="jumbotron jumbotron-fluid" style="background: url({% static 'images/writefilm.jpeg' %}) center center / cover no-repeat;">
         <div class="container">
             <section class="row">
                 <h1 class="d-inline-block text-center text-sm-left">Books &amp; <br>Films</h1>
@@ -19,12 +19,12 @@
                     <ol class="breadcrumb">
                         <span>You are in: &nbsp;</span>
                         <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{% url 'books' %}">Books</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Add Book</li>
+                        <li class="breadcrumb-item"><a href="{% url 'films' %}">Films</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Add Film</li>
                     </ol>
                 </nav>
                 <p id="jumbotext" class="col-12">
-                    Missing a Book? &nbsp; Add it!
+                    Missing a Film? &nbsp; Add it!
                 </p>
             </section>
         </div>
@@ -32,7 +32,7 @@
 {% endblock %}
 
 {% block contentheader %}
-  <h3>Upload a book</h3>
+  <h3>Upload a film</h3>
 {% endblock %}
 
 {% block content %}
@@ -41,8 +41,8 @@
     <p class="fields-required">The fields marked with &#42; are required.</p>
   {% csrf_token %}
   {{ form|crispy }}
-  <div id="submit">
-    <button type="submit" class="btn btn-primary">Add Book</button>
-  </div>
+    <div id="submit">
+        <button type="submit" class="btn btn-primary">Add Film</button>
+    </div>
 </form>
 {% endblock %}

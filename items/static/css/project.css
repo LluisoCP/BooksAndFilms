@@ -1,0 +1,13 @@
+/* The Project */
+#project {
+	font-weight: 700;
+	color: white;
+	padding: 0 15px;
+}
+#project a {
+	color: rgb(252,238,45);
+	transition: color .2s linear;
+}
+#project a:hover {
+	color: violet;
+}

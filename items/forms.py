@@ -2,14 +2,23 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
-from .models import Book, Comment, Author
+from .models import Book, Comment, Author, Genre, Contact, Film
+
+class ContactForm(forms.ModelForm):
+    class Meta:
+    	model = Contact
+    	fields = ['first_name', 'last_name', 'organisation', 'content',]
+    	widgets = {
+            'content': forms.Textarea
+        }
 
 class UploadBookForm(forms.ModelForm):
 	class Meta:
 		model = Book
-		fields = ['title', 'author', 'release_year', 'language', 'description', 'image']
+		fields = ['title', 'author', 'genres', 'release_year', 'language', 'description', 'image']
 		widgets = {
-            'description': forms.Textarea,# or Textarea()?
+            'description': forms.Textarea,
+            'genres': forms.CheckboxSelectMultiple
         }
 		
 
@@ -18,13 +27,23 @@ class CommentBookForm(forms.ModelForm):
 		model = Comment
 		fields = ['user', 'content', 'grade']
 		widgets = {
-            'content': forms.Textarea,# or Textarea()?
+            'content': forms.Textarea
         }
-		
+
+class CreateFilmForm(forms.ModelForm):
+    
+    class Meta:
+    	model = Film
+    	fields = ['title', 'director', 'genres', 'release_year', 'description', 'image']
+    	widgets = {
+    		'description': forms.Textarea,
+    		'genres': forms.CheckboxSelectMultiple
+    	}
+	
 class CreateAuthorForm(forms.ModelForm):
 	class Meta:
 		model = Author
-		fields =['first_name', 'last_name', 'date_of_birth', 'date_of_death']
+		fields =['first_name', 'last_name', 'date_of_birth', 'date_of_death',] #Afegir role i genre
 		
 # REGISTRATION / AUTHENTICATION
 
@@ -39,8 +58,14 @@ class SignUpForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
+        fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2', ]
 		
+# Should I try CreateView ?? Didn't work
+class CreateGenreForm(forms.ModelForm):
+    class Meta:
+        model = Genre
+        fields = ['name',]
+
 # CUSTOM
 class CreateUserForm(forms.Form):
 	username = forms.CharField(max_length=32)
@@ -50,7 +75,7 @@ class CreateUserForm(forms.Form):
 	password2=forms.CharField(max_length=32,widget=forms.PasswordInput())
 	email=forms.EmailField(required=False)
 
-	def clean_username(self): # check if username dos not exist before
+	def clean_username(self): # check if username exists
 		try:
 			User.objects.get(username=self.cleaned_data['username']) #get user from user model
 		except User.DoesNotExist:

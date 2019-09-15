@@ -1,0 +1,137 @@
+/*DETAILS*/
+/*Book & Film*/
+#item {
+	margin: 0 30px 30px;
+	padding: 30px 20px 10px;
+	background-color: rgb(240,240,245);
+	border: 3px solid #0e3cd3;
+	border-radius: 10px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+/* Here media queries are in order to make it responsive */
+#item #image {
+	position: relative;
+	flex: 0 1 35%;
+}
+#item #image figcaption {
+	width: 80%;
+	text-align: center;
+	font-weight: bold;
+	padding: 5px 15px;
+	background-color: rgba(255,255,255,0.7);
+	border-radius: 5px;
+	position: absolute;
+	bottom: 15px;
+	left: 50%;
+	transform: translateX(-50%);
+}
+#item #bookdesc {
+	margin: 0 2%;
+	flex: 0 1 61%;
+	align-self: center;
+}
+#item #bookdesc p {
+	font-weight: 700;
+}
+#item #grade {
+	padding: 20px 30px;
+	margin: 20px 5%;
+	flex: 0 1 90%;
+}
+#item #grade .progress {
+	background-color: white;
+	border: 3px solid black;
+}
+#item #grade h5 {
+	font-weight: 700;
+}
+#item #comments {
+	margin: 20px 0;
+	flex: 1;
+}
+#item #comments h4 {
+	text-transform: uppercase;
+	font-weight: 900;
+	text-align: center;
+	margin-bottom: 1.5rem;
+}
+#item #comments .comment {
+	margin: 0;
+	/*margin: .5rem 0;*/
+	padding: .5rem;
+	padding-left: 2em;
+	border-top: 2px solid black;
+}
+#item #comments .comment.last-comment {
+	border-bottom: 2px solid black;
+}
+#item #comments .comment .commentdata p {
+	margin-top: 1rem;
+}
+#item #comments .comment .content {
+	font-style: italic;
+}
+#item #comments #commentbook {
+	margin-top: 20px;
+	text-align: center;
+}
+#item #comments #commentbook h4 {
+	margin-bottom: 1rem;
+}
+#item #comments #commentbook p {
+	font-weight: 700;
+}
+#item #comments #commentbook button.btn {
+	background-color: #0e3cd3;
+	font-weight: 700;
+	color: white;
+	border: 2px solid black;
+}
+#item #comments #commentbook button.btn:hover {
+	color: black;
+	background-color: #51a7f7;
+}
+#item #no-comments {
+	text-align: center;
+	flex: 1;
+	margin: 2rem auto;
+}
+#item #no-comments h4 {
+	font-weight: 700;
+	margin-bottom: 1.25rem
+}
+#item #no-comments button {
+	background-color: #0e3cd3;
+	font-weight: 700;
+	color: white;
+	border: 2px solid black;
+}
+#item #no-comments button:hover {
+	color: black;
+	background-color: #51a7f7;
+}
+
+/* Comment Form */
+#submit {
+	text-align: center;
+}
+#submit .btn-danger {
+	font-weight: 700;
+	background-color: #f4090d;
+}
+#submit .btn-danger:hover {
+	background-color: #f7676a;
+	color: black;
+}
+/* Comment Form Buttons*/
+.btn-primary {
+	color: white;
+	font-weight: 700;
+	background-color: #0e3cd3;
+}
+.btn-primary:hover {
+	background-color: #51a7f7;
+	color: black;
+}

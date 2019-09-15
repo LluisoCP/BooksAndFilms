@@ -1,0 +1,53 @@
+/*FORMS*/
+/*artist+book+film+genre*/
+form.form {
+	border: 3px solid #0e3cd3;
+	border-radius: 10px;
+	width: 80%;
+	margin: 0 auto;
+	padding: 20px;
+	background-color: white;
+	margin-bottom: 20px;
+}
+/* Centrar el button */
+#submit {
+	text-align: center;
+}
+/* Upload item genres checkbox*/
+.form #div_id_genres > div {
+	display: flex;
+	flex-wrap: wrap;
+}
+.form #div_id_genres > div .checkbox {
+	flex: 0 1 50%;
+}
+.form #div_id_genres > div small {
+	flex: 1 1 100%;
+}
+@media (min-width: 700px) {
+	.form #div_id_genres div {
+		padding-left: 10px;
+	}
+	.form #div_id_genres div .checkbox {
+		flex-basis: calc(100% / 3);
+	}
+}
+/* Upload item genres checkbox*/
+.form #div_id_genres > div {
+	display: flex;
+	flex-wrap: wrap;
+}
+.form #div_id_genres > div .checkbox {
+	flex: 0 1 50%;
+}
+.form #div_id_genres > div small {
+	flex: 1 1 100%;
+}
+@media (min-width: 700px) {
+	.form #div_id_genres div {
+		padding-left: 10px;
+	}
+	.form #div_id_genres div .checkbox {
+		flex-basis: calc(100% / 3);
+	}
+}

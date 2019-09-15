@@ -1,0 +1,31 @@
+/*Custom carousel*/
+#bookcarousel .carousel-item {
+	height: 600px;
+}
+#bookcarousel #carouseltext {
+	font-weight: 700;
+	width: 70%;
+	background-color: rgba(0,0,0,0.7);
+	border-radius: 10px;
+	padding: 10px;
+	bottom: 30px;
+}
+#bookcarousel #carouseltext h5 {
+	margin-bottom: 0;
+}
+#bookcarousel #carouseltext p {
+	margin-top: .5em;
+	margin-bottom: 0;
+}
+/* Carousel Controls */	
+#controls {
+	border: 1px solid black;
+	border-radius: .2rem;
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-50%);
+}
+#controls button:hover {
+	color: black;
+}

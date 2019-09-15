@@ -1,0 +1,30 @@
+/* Artist */
+section.artist-detail {
+	width: 80%;
+	margin: 10px 10% 20px;
+	padding: 25px 40px;
+	background-color: white;
+	border-radius: 5px;
+	border: 3px solid #0e3cd3;
+}
+section.artist-detail h2 {
+	margin-bottom: .7em;
+}
+section.artist-detail .artist-data {
+	margin: 40px 0 40px 2em;
+}
+section.artist-detail .artpiece {
+	margin: 0 0 20px 2em;
+}
+section.artist-detail .artpiece h5 a {
+	transition: 0.2s all linear;
+}
+section.artist-detail .artpiece h5 a:hover {
+	color: crimson
+}
+section.artist-detail .artpiece small {
+	font-weight: bold;
+}
+section.artist-detail .artpiece h5::before {
+	content: '';
+}

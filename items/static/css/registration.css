@@ -1,0 +1,55 @@
+form.form {
+	border: 3px solid #0e3cd3;
+	border-radius: 10px;
+	width: 80%;
+	margin: 0 auto;
+	padding: 20px;
+	background-color: white;
+	margin-bottom: 20px;
+}
+
+/* Centrar el button (totes) */
+#submit {
+	text-align: center;
+}
+/*Log In*/
+p.logintro, .searchintro {
+	padding: 0 15%;
+	color: white;
+	font-weight: 700;
+}
+p.logintro a, p.signupintro a {
+	font-weight: 700;
+	color: red;
+	transition: color .2s linear;
+}
+p.logintro a:hover {
+	color: violet;
+}
+/* Lost Password? & Already a member? */
+.form ~ p.logintro, .form ~ p.signupintro {
+	text-align: center;
+	font-size: 1.5rem;
+	margin-bottom: 1.5rem;
+	padding: 0;
+	background: linear-gradient(to right, rgba(240,240,240,0), rgba(240,240,240,0) 15%, rgba(240,240,240,.6) 40%, rgba(240,240,240,.6) 60%, rgba(240,240,240,0) 85%, rgba(240,240,240,0) 100%);
+}
+.form ~ p.logintro a:hover, .form ~ p.signupintro a:hover {
+	color: black;
+}
+.password-reset {
+	color: white;
+	font-weight: bold;
+	text-align: center;
+	margin: 20px;
+	padding: 10px;
+}
+p.password-reset span {
+	text-decoration: underline;
+}
+p.password-reset small {
+	font-weight: bold;
+}
+.password-reset.failed {
+    color: red;
+}

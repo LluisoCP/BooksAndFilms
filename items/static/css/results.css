@@ -1,0 +1,22 @@
+/* Search Results */
+#searchresults {
+	width: 80%;
+	margin: 10px 10% 20px;
+	padding: 25px 40px;
+	background-color: white;
+	border-radius: 5px;
+	border: 3px solid #0e3cd3;
+}
+#searchresults li {
+	font-weight: 700;
+}
+#searchresults h4:not(:first-of-type) {
+	margin-top: 1em;
+}
+#searchresults a {
+	color: #0e3cd3;
+	transition: color .2s linear;
+}
+#searchresults a:hover {
+	color: #51a7f7;
+}

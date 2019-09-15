@@ -1,0 +1,36 @@
+/*Has Commented Modal */
+#has-commented {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+	width: 100vw;
+	z-index: 10;
+    background-color: rgba(20,20,20,.5);
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1.0);
+    transition: all .3s linear;
+}
+#has-commented.out {
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.1);
+}
+#has-commented article {
+	position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    height: 150px;
+	width: 600px; /* Media query */
+	background-color: rgb(217,217,221);
+	padding: 20px 0;
+	transition: top .3s linear;
+}
+#has-commented.out article {
+    top: -300px;
+}
+#has-commented button {
+	border: 2px solid black;
+}

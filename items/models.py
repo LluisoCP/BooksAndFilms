@@ -22,6 +22,10 @@ class Author(models.Model):
         """String for representing the Model object."""
         return f'{self.last_name}, {self.first_name}'
     
+    def get_full_name(self):
+        """Method to get the author's full name"""
+        return f'{self.last_name}, {self.first_name}'
+
     class Meta:
         ordering: ['last_name']
         
@@ -33,7 +37,7 @@ class Comment(models.Model):
 		related_name='comments',
 		related_query_name='with_comments',
 		on_delete=models.CASCADE,
-		null=True,
+		null=True, #False
 		blank=True
 	)
 	#Podria afegir-li un altre foreignKey vers Film i afegir als dos FK un default rollo 'This comment is for a book/film'. Llavors a cada form per crear un comment donar la possibilitat de indicar el tipus d'item que toca.
@@ -47,7 +51,7 @@ class Comment(models.Model):
 		null=True #False
     )
 	#class Meta = [
-	#	ordering = ['commented_at']
+	#	ordering = ['commented_at'] #Negatiu?
 	#]
         
 class Contact(models.Model):
@@ -59,16 +63,25 @@ class Contact(models.Model):
 
 class Genre(models.Model):
     """Model representing a book genre."""
-    name = models.CharField(max_length=32, help_text='Enter a genre')
-    
+    name = models.CharField(max_length=32, help_text='Enter a genre', unique=True)
+    def get_absolute_url(self):
+        """Returns url to access the detail page of the genre"""
+        return reverse('genre_items', args=[str(self.id)])
+
     def __str__(self):
         """String for representing the Model object."""
         return self.name
 
+    def get_num_genre(self):
+        """Returns the number of artpieces of the genre"""
+        #return self.item_set.count()
+        return Item.objects.filter(genres__name=self.name).count()
+        #return self.items_item_related.count() #canviar si canvio name_related
+
 class Item(models.Model):
     """Abstract model serving as base model for Book and Film."""
     created_at = models.DateField(auto_now_add=True)
-    title = models.CharField(max_length=32)
+    title = models.CharField(max_length=32, unique=True)
     description = models.CharField(max_length=400, null=True, blank=True)
     phrase = models.CharField(max_length=100, null=True, blank=True)
     
@@ -113,9 +126,11 @@ class Item(models.Model):
     
     genres = models.ManyToManyField(
 		Genre,
-		help_text='Select a genre for this artpiece',
-		related_name="%(app_label)s_%(class)s_related",
-        related_query_name="%(app_label)s_%(class)ss",
+		help_text='Select the genres for this artpiece',
+		related_name="%(app_label)s_%(class)s_related",#items_item_related!!
+        related_query_name="%(app_label)s_%(class)ss",#items_items!!
+        blank=True,
+        #null=True
 	)
     def display_genre(self):
         """Create a string for the Genre. This is required to display genre in Admin."""

@@ -5,14 +5,18 @@ from . import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('books/', views.BookListView.as_view(), name='books'),
-    path('books/upload/', views.UploadBookView, name='upload-book'),
+    path('books/upload/', views.uploadBookView, name='upload-book'),
     path('books/<int:pk>', views.book_detail, name='book-details'),
-    #path('films/', views.FilmView.as_view(), name='films'),
-    #path('films/<int:pk>', views.FilmDetail.as_view(), name='film-detail'),
-    #path('films/upload/', views.UploadFilmView, name='upload-film'),
+    # path('films/', views.FilmListView.as_view(), name='films'),
+    path('films/', views.filmListView, name='films'),
+    path('films/<int:pk>', views.film_detail, name='film-detail'),
+    path('films/add/', views.create_film, name='create-film'),
     path('authors/', views.AuthorListView.as_view(), name='authors'),
     path('authors/<int:pk>', views.author_detail, name = 'author-detail'),
-	path('the-project', views.project, name='project')
+    path('genres/', views.genres, name='genres'),
+    path('genres/<int:pk>', views.genre_items, name='genre_items'),
+    path('genres/add/', views.createGenreView, name='add-genre'),
+	path('the-project', views.project, name='project'),
 ]
 
 # SEARCH FORM

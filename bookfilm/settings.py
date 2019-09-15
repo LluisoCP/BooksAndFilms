@@ -41,6 +41,10 @@ INSTALLED_APPS = [
 	'crispy_forms',
 ]
 
+SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
+SESSION_COOKIE_HTTPONLY = True
+SESSION_COOKIE_AGE = 300 # Don't thing this is needed for my use of sessions
+
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [

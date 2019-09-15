@@ -1,0 +1,51 @@
+/* Genres List*/
+.genres ul li {
+	background-color: rgba(147,196,168);
+	padding-right: .75rem;
+}
+.genres ul a {
+	display: block;
+	height: 100%;
+	width: 100%;
+	font-size: .8rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	transition: color .2s linear;
+}
+.genres ul a:hover {
+	color: white;
+}
+.genres ul a .badge {
+	float: right;
+	line-height: 1.5em;
+	padding-right:  .75em;
+	padding-left: .75em;
+	border-radius: 40%;
+}
+.genres {
+	width: 100%;
+	margin: 0 auto;
+}
+@media(min-width: 350px) {
+	.genres {
+		width: 80%;
+		margin-bottom: 2rem;
+	}
+	.genres ul li {
+		padding-right: 1.25rem;
+	}
+	.genres ul a {
+		font-size: 1.2em;
+	}
+	.genres ul a .badge {
+		position: absolute;
+		top: 50%;
+		right: 1rem;
+		transform: translateY(-50%);
+	}
+}
+@media(min-width: 576px) {
+	.genres {
+		width: 50%;
+	}
+}

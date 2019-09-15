@@ -1,0 +1,47 @@
+/* Genre Items */
+#genre-items .card-img-top {
+	max-height: 300px; 
+}
+
+#genre-items .card-body .card-title {
+	text-transform: uppercase;
+	font-weight: 700;
+}
+#genre-items .card-body .card-text {
+	font-weight: 700;
+}
+#genre-items .card-body a.btn {
+	color: white;
+	font-weight: 700;
+	border: 2px solid black;
+	background-color: #0e3cd3;
+}
+#genre-items .card-body a.btn:hover {
+	background-color: #51a7f7;
+	color: black;
+}
+#genre-items .contentheader p {
+	font-weight: 700;
+	margin: 20px auto 30px;
+}
+#genre-items .contentheader p a {
+	color: rgb(252,238,45);
+	transition: color .2s linear;
+}
+#genre-items .contentheader p a:hover {
+	color: violet;
+}
+/* 0 results message by genre*/
+.no-items {
+	color: white;
+	font-weight: 700;
+	margin: 3rem 2rem 0;
+	text-align: center;
+}
+.no-items a {
+	color: rgb(252,238,45);
+	transition: color .2s linear;
+}
+.no-items a:hover {
+	color: violet;
+}

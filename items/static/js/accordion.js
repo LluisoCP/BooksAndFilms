@@ -12,15 +12,18 @@ function Transform(e) {
     }
     let dropdown = this.querySelector('ul');
     let dropHeight = dropdown.scrollHeight;
+    let clientHeight = dropdown.clientHeight;
+    let offsetHeight = dropdown.offsetHeight;
     //let arrow = this.querSelector('i');
+    console.log(dropHeight, clientHeight, offsetHeight);
     if (dropdown.clientHeight === 0) {
         dropdown.style.height = dropHeight + 'px';
         //arrow.classList.toggle("fa-rotate-180");
-    } else if (dropdown.clientHeight === dropHeight) {
-        dropdown.style.height = 0;
-        //arrow.classList.toggle("fa-rotate-180");
+    // } else if (dropdown.clientHeight === dropHeight) {
+    //     //arrow.classList.toggle("fa-rotate-180");
     } else {
-        alert('Function Failed!');
+        dropdown.style.height = 0;
+        // alert('Function Failed!');
     }
 }
 

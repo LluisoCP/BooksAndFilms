@@ -1,0 +1,31 @@
+/*Artist List*/
+.artist {
+	background-color: white;
+	border: 1px solid black;
+	border-radius: 5px;
+	padding: 20px;
+	margin: 20px 2%;
+	flex: 0 1 46%;
+}
+.artist h4 {
+	text-align: center;
+	width: 90%;
+	margin: 0 auto 1rem;
+}
+.artist p {
+	margin: 0 auto;
+}
+.artist p.artist-text {
+	margin: 5px auto 15px;
+}
+.artist .btn-primary {
+	color: white;
+	font-weight: 700;
+	background-color: #0e3cd3;
+	border: 2px solid black;
+}
+.artist .btn-primary:hover {
+	background-color: #51a7f7;
+	color: black;
+}
+
