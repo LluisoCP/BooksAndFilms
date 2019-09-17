@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, re_path, include
 
 from . import views
 
@@ -8,7 +8,7 @@ urlpatterns = [
     path('books/upload/', views.uploadBookView, name='upload-book'),
     path('books/<int:pk>', views.book_detail, name='book-details'),
     # path('films/', views.FilmListView.as_view(), name='films'),
-    path('films/', views.filmListView, name='films'),
+    path('films/', views.FilmListView.as_view(), name='films'),
     path('films/<int:pk>', views.film_detail, name='film-detail'),
     path('films/add/', views.create_film, name='create-film'),
     path('authors/', views.AuthorListView.as_view(), name='authors'),
@@ -44,16 +44,18 @@ urlpatterns += [
 #if settings.DEBUG:
 #	urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 	
-	
+# CAPTCHA
+urlpatterns += [
+    re_path(r'^captcha/', include('captcha.urls')),
+]
 from django.conf import settings
-from django.urls import re_path
 from django.views.static import serve
 
 # ... the rest of your URLconf goes here ...
 
-if settings.DEBUG:
-    urlpatterns += [
-        re_path(r'^media/(?P<path>.*)$', serve, {
-            'document_root': settings.MEDIA_ROOT,
-        }),
-    ]
+# if settings.DEBUG:
+#     urlpatterns += [
+#         re_path(r'^media/(?P<path>.*)$', serve, {
+#             'document_root': settings.MEDIA_ROOT,
+#         }),
+#     ]

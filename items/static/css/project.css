@@ -11,3 +11,32 @@
 #project a:hover {
 	color: violet;
 }
+/* Comment the Project Form */
+form.form {
+	border: 3px solid #0e3cd3;
+	border-radius: 10px;
+	width: 80%;
+	margin: 0 auto;
+	padding: 20px;
+	background-color: white;
+	margin-bottom: 20px;
+}
+/* Centrar el button */
+#submit {
+	text-align: center;
+}
+/* Uniform buttons */
+.form .btn-primary {
+	font-weight: 700;
+/*	
+	background-color: #0e3cd3;
+	color: white;
+	border: 2px solid black;
+*/
+}
+/*
+.form .btn-primary:hover {
+	background-color: #51a7f7;
+	color: black;
+}
+*/

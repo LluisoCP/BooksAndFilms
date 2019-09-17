@@ -4,22 +4,22 @@
   <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
 {% endblock %}
 {% block contentheader %}
-  <h3>We have {{ num_books }} amazing artpieces, check'em out!</h3>
+  <h3>We have {{ num_items }} amazing artpieces, check'em out!</h3>
 {% endblock %}
 
 {% block content %}
 
-{% if img_books and img_data %}
+{% if items %}
 <div id="bookcarousel" class="bd-example">
   <div id="imgcarousel" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
-	  {% for book in img_books %}
+	  {% for item in items %}
       <div class="carousel-item{% if forloop.first %} active{% endif %}" data-interval="5000">
-        <img src="{{ book.get_image }}" class="d-block w-100" alt="{{ book.title }}">
+        <img src="{{ item.get_image }}" class="d-block w-100" alt="{{ item.title }}">
         <div id="carouseltext" class="carousel-caption d-none d-md-inline-block text-center">
-          <h5>{{ book.title }}</h5>
-		{% if book.phrase %}
-          <p>{{ book.phrase }}</p>
+          <h5>{{ item.title }}</h5>
+		{% if item.phrase %}
+          <p>{{ item.phrase }}</p>
 		{% endif %}
         </div>
       </div>
@@ -45,6 +45,15 @@
       </button>
   	</div>
   </div>
+</div>
+{% else %}
+<div id="no-items">
+  <h1>
+    We haven't books yet!
+  </h1>
+  <h3>
+    Sign in and add items in the <i>Create</i> Section.
+  </h3>
 </div>
 {% endif %}
 

@@ -39,7 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 	'crispy_forms',
+    'storages',
+    'captcha',
 ]
+# Captcha Settings
+CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'
+CAPTCHA_MATH_CHALLENGE_OPERATOR = 'x'
 
 SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
 SESSION_COOKIE_HTTPONLY = True
@@ -135,9 +140,23 @@ STATIC_URL = '/static/'
 
 # Added in order to handle user uploaded files
 
-MEDIA_URL = '/items/media/'
+# Manage File Uploads
+# MEDIA_URL = '/items/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# Manage File Uploads to an S3 Bucket
+DEFAULT_FILE_STORAGE = 'bookfilm.storage_backends.MediaStorage'
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_CUSTOM_DOMAIN = config('AWS_S3_CUSTOM_DOMAIN')
+# AWS_LOCATION = config('AWS_LOCATION')
+AWS_PUBLIC_MEDIA_LOCATION = config('AWS_LOCATION')
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+AWS_DEFAULT_ACL = None
+# AWS_S3_OBJECT_PARAMETERS = config('AWS_S3_OBJECT_PARAMETERS')
 
 LOGIN_URL= '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'

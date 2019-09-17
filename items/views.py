@@ -7,22 +7,19 @@ from .forms import UploadBookForm, CommentBookForm, CreateGenreForm, ContactForm
 
 from django.http import HttpResponse
 
-from .models import Book, Comment, Author, Genre, Film
+from .models import Book, Comment, Author, Genre, Film, Item
 from django.db.models import Q
 
 
 # MAIN VIEW
 def index(request):
-    """View function for the main page if the site"""
-    num_books = Book.objects.all().count()
-    img_books = Book.objects.exclude(pk=2).exclude(pk=7) # Eliminar
-    num_img_books = img_books.count()
-    img_data = range(num_img_books)
-	#img_books = Book.objects.exclude(Q(pk=2) | Q(pk=7))
+    """View function for the main page of the site"""
+    items = Book.objects.all() # crear una llista de items
+    # num_items = items.count()
+    num_items = Book.objects.all().count() # crear una llista de items
     context = {
-        'num_books': num_books,
-        'img_books': img_books,
-		'img_data': img_data
+		'items': items,
+        'num_items': num_items,
     }
     return render(request, 'index.html', context=context)
 
@@ -73,18 +70,18 @@ class BookListView(ListView):
         return context
     
 # Per provar això hi ha que migrar
-def filmListView(request):
-    return render(request, 'items/film_list.html', {'film_list': False})
+# def filmListView(request):
+#     return render(request, 'items/film_list.html', {'film_list': False})
 
-#class FilmListView(ListView):
-#	model = Film
-#	paginate_by = 6
-#	def get_context_data(self, **kwargs):
-#		context = super().get_context_data(**kwargs)
-#		has_commented = self.request.session.get('has_commented', False)
-#		context['has_commented'] = has_commented
-#		self.request.session['has_commented'] = False
-#		return context
+class FilmListView(ListView):
+    model = Film
+    paginate_by = 6
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        has_commented = self.request.session.get('has_commented', False)
+        context['has_commented'] = has_commented
+        self.request.session['has_commented'] = False
+        return context
 
 
 class AuthorListView(ListView):
@@ -169,7 +166,7 @@ def book_detail(request, pk):
 		form = CommentBookForm(request.POST)
 		if form.is_valid():
 			new_comment = form.save(commit=False)
-			new_comment.item = form.item = book #Canviar item per book
+			new_comment.book = form.book = book
 			new_comment.save()
 			request.session['has_commented'] = True
 			return redirect('book-details', pk=pk)
@@ -194,7 +191,7 @@ def film_detail(request, pk):
 		form = CommentBookForm(request.POST) # Does it make sense to have two different comment forms?
 		if form.is_valid():
 			new_comment = form.save(commit=False)
-			new_comment.item = form.item = film # Is form.item needed here? Change item=>film
+			new_comment.film = form.film = film
 			new_comment.save()
 			request.session['has_commented'] = True
 			return redirect('film-detail', pk=pk)

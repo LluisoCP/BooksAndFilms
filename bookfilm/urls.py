@@ -35,3 +35,8 @@ urlpatterns += [
 urlpatterns += [
     path('accounts/', include('django.contrib.auth.urls')),
 ]
+
+# CAPTCHA
+# urlpatterns += [
+#     path(r'^captcha/', include('captcha.urls')),
+# ]

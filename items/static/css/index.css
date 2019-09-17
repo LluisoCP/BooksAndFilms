@@ -29,3 +29,17 @@
 #controls button:hover {
 	color: black;
 }
+#no-items { /* Això hi ha que arreglar-ho */
+	color: white;
+	text-align: center;
+	/*position: relative;*/
+	width: 100%;
+	height: 100%;
+	padding: 20% 10%;
+}
+#no-items h1 {
+	font-size: 3em;
+}
+#no-items h3 {
+	font-size: 2em;
+}
